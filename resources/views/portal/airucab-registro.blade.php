@@ -43,12 +43,12 @@
          <label for="formGroup">pais</label>
          <select name= "pais" id="pais" class="form-control" required>
             <option value="">Seleccione el pais donde reside</option>
-            @foreach($lugares as $lugar) 
+            @foreach($lugares as $lugar)
             <option value="{{$lugar->id_lugar}}">{{$lugar->nombre_lugar}}</option>
           @endforeach
         </select>
       </div>
-     
+
       <div class="form-group">
          <label for="formGroup">estado</label>
          <select name= "estado" id="estado" class="form-control" required>
@@ -67,7 +67,7 @@
             <option value="">Seleccione la parroquia donde reside</option>
         </select>
       </div>
-      
+
 
   </div>
 
@@ -112,7 +112,7 @@
 
 
 </div>
- {!!Form::close()!!} 
+ {!!Form::close()!!}
 </div>
 
 
@@ -175,7 +175,7 @@
 
             </div>
 
-           
+
 
         </div>
 
