@@ -4,6 +4,7 @@
 
 @section('content')
 <div class="container-fluid">
+
   <div class="row">
      <div class="col-lg-4 col-lg-offset-1 ">
        <h2 id="margenSubmenu">REGISTRO</h2>
@@ -19,7 +20,7 @@
           </ul>
 </div>
           <div class="tab-content " >
-          
+
             <div class="tab-pane fade in active" id="Proveedores">
               <div class="container-fluid" id="margenSubmenu">
                 <div class="row">
@@ -35,12 +36,12 @@
          <label for="formGroup">pais</label>
          <select name= "pais" id="pais" class="form-control" required>
             <option value="">Seleccione el pais donde reside</option>
-            @foreach($lugares as $lugar) 
+            @foreach($lugares as $lugar)
             <option value="{{$lugar->id_lugar}}">{{$lugar->nombre_lugar}}</option>
           @endforeach
         </select>
       </div>
-     
+
       <div class="form-group">
          <label for="formGroup">estado</label>
          <select name= "estado" id="estado" class="form-control" required>
@@ -63,22 +64,52 @@
          <label for="formGroup">Monto acreditado</label>
           <input class="form-control"  type="text" placeholder="Ingrese el apellido*">
       </div>
-      
+
+
+
+
 
   </div>
 
   <div class="col-lg-4">
 
+        <form id="bookForm" method="post" class="l">
+          <form method="post" action="">
+          <div id="newlink">
   <div class="form-group">
-         <label for="formGroup">Telefono 1</label>
-          <input class="form-control"  type="text" placeholder="Ingrese el telefono 1*">
-      </div>
+           <label for="formGroup">Telefono</label>
+           <div class="row">
+           <div class="col-md-6">
+          <input class="form-control"  type="text" placeholder="Cod Area*">
+           </div>
+           <div class="col-md-6">
+          <input class="form-control"  type="text" placeholder="telefono*">
+           </div>
+           </div>
+        </div>
+</div>
 
- <div class="form-group">
-         <label for="formGroup">Telefono 2</label>
-          <input class="form-control"  type="text" placeholder="Ingrese el telefono 2*">
-      </div>
+<p id="addnew">
 
+
+    <button type="button" onclick="new_link()"class="btn btn-default"><i class="fa fa-plus"></i></button>
+</p>
+</form>
+<!-- Template -->
+<div id="newlinktpl" style="display:none">
+    <div class="form-group">
+             <label for="formGroup">Telefono</label>
+             <div class="row">
+             <div class="col-md-6">
+            <input class="form-control"  type="text" placeholder="Cod Area*">
+             </div>
+             <div class="col-md-6">
+            <input class="form-control"  type="text" placeholder="telefono*">
+             </div>
+             </div>
+          </div>
+</div>
+    </form>
 
 <div class="form-group">
          <label for="formGroup">Correo electronico</label>
@@ -109,13 +140,31 @@
       </div>
     </div>
 </div>
-
-
-
             </div>
             </div>
-
+            <script>/* para botones dinamicos*/
+            var ct = 1;
+            function new_link()
+            {
+            	ct++;
+            	var div1 = document.createElement('div');
+            	div1.id = ct;
+            	// link to delete extended form elements
+            	var delLink = '<div style="text-align:right;"> <button  type="button" onclick="deletet('+ct+')"class="btn btn-default"><i class="fa fa-minus"></i></button> </div>';
+            	div1.innerHTML = document.getElementById('newlinktpl').innerHTML + delLink;
+            	document.getElementById('newlink').appendChild(div1);
+            }
+            // function to delete the newly added set of elements
+            function deletet(eleId)
+            {
+            	d = document;
+            	var ele = d.getElementById(eleId);
+            	var parentEle = d.getElementById('newlink');
+            	parentEle.removeChild(ele);
+            }
+            </script>
         </div>
+
 
 
 @endsection
