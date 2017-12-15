@@ -94,62 +94,44 @@
 <div class="form-group " id="phones">
 
 <label for="formGroup">Telefono</label>
-<<<<<<< HEAD
        <div class="form-inline"> 
           <input class="form-control" name="cod[]" type="text" placeholder="Cod Area*">
           <input class="form-control" name="phone[]" type="text" placeholder="Ingrese el telefono*">
        <button type="button" class="btn btn-default addButton" onclick="dynamic_phones();" > <i class="fa fa-plus"></i> </button>
      </div>
-=======
-
- <div class="input-group">
-     <input class="form-control"  type="text" placeholder="Ingrese el telefono*">
-        <span class="input-group-btn">
-        <button type="button" class="btn btn-default addButton" onclick="dynamic_phones();" > <i class="fa fa-plus"></i> </button>
-        </span>
-  </div>
-
->>>>>>> 6a7e606bd55461eb8f140c3c357eb2bfd094111c
 </div>
 
 <div class="form-group" id="mail">
       <label for="formGroup">Correo electronico</label>
-<<<<<<< HEAD
-<<<<<<< HEAD
-         <div class="form-inline"> 
+       <div class="form-inline"> 
           <input class="form-control" name="correo[]" type="text" placeholder="Ingrese su correo*">
           <button type="button" class="btn btn-default" onclick="dynamic_mail();" > <i class="fa fa-plus"></i> </button>
        </div>
-=======
-=======
->>>>>>> 6a7e606bd55461eb8f140c3c357eb2bfd094111c
+
         <div class="input-group">
           <input class="form-control"  type="text" placeholder="Ingrese su correo*">
         <span class="input-group-btn">
            <button type="button" class="btn btn-default addButton" onclick="dynamic_mail();" > <i class="fa fa-plus"></i> </button>
         </span>
       </div>
->>>>>>> 6a7e606bd55461eb8f140c3c357eb2bfd094111c
+
 </div>
 
 <div class="form-group" id="web">
          <label for="formGroup">Pagina web</label>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
           <div class="form-inline"> 
             <input class="form-control" name="web[]" type="text" placeholder="Ingrese su pagina web*">
             <button type="button" class="btn btn-default addButton" onclick="dynamic_web();" > <i class="fa fa-plus"></i> </button>
          </div>
-=======
-=======
->>>>>>> 6a7e606bd55461eb8f140c3c357eb2bfd094111c
+
          <div class="input-group">
           <input class="form-control"  type="text" placeholder="Ingrese su pagina web*">
             <span class="input-group-btn">
            <button type="button" class="btn btn-default addButton" onclick="dynamic_web();" > <i class="fa fa-plus"></i> </button>
           </span>
       </div>
->>>>>>> 6a7e606bd55461eb8f140c3c357eb2bfd094111c
+
 </div>
         <div class="form-group">
                  <label for="formGroup">Fecha de incio</label>
@@ -180,11 +162,10 @@
 
         </div>
 
-<<<<<<< HEAD
+
       {!! Form::close() !!}
 
-=======
->>>>>>> 6a7e606bd55461eb8f140c3c357eb2bfd094111c
+
         <script>
               var add = 1;
               function dynamic_phones() {
