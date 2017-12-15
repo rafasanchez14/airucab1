@@ -45,7 +45,10 @@ class VistaController extends Controller
         $sedes=DB::select("SELECT nombre_sede,cod_sede FROM sede  order by nombre_sede;");
         $materiales=DB::select("SELECT nombre,cod_material FROM material  order by nombre;");
         $pruebas=DB::select("SELECT nombre_prueb,cod_prueba FROM Prueba order by nombre_prueb;");
-    	return view('portal/airucab-pruebas',compact('sedes','materiales','pruebas'));
+        $pruebamat=DB::select("SELECT  p.cod_pruebamat,p.fechafin, m.nombre, pp.nombre_prueb , z.nombre_zona, s.nombre_sede
+          from material m, prueba pp, material_prueba p, zona z, sede s
+          where pp.cod_prueba=p.cod_prueba and m.cod_material=p.cod_material and p.id_zona=z.id_zona and s.cod_sede=z.cod_sede");
+      return view('portal/airucab-pruebas',compact('sedes','materiales','pruebas','pruebamat'));
     }
     public function materiaPrima()
     {
