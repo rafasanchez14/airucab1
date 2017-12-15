@@ -23,19 +23,18 @@ route::get('/','VistaController@inicio');
  route::get('pruebas','VistaController@pruebas');
  route::get('materiaPrima','VistaController@materiaPrima');
  route::get('diseñoAvion','VistaController@diseñoAvion');
- Route::resource('client', 'clientController');
 
 route::resource('lugares','LugarController');
 
 Route::get('/buscarEstado/{id}/pertenece','VistaController@buscarEstados');
+Route::get('/buscarMatpru/{id}/pertenece','PruebasController@buscarMP');
 
 Route::get('/buscarMunicipio/{id}/pertenece','VistaController@buscarMunicipios');
 
 Route::get('/buscarParroquia/{id}/pertenece','VistaController@buscarParroquias');
-
+Route::post('/inserta-cliente','clientController@insertar_cliente' );
 Route::post('/inserta-proveedor','ProveedorController@insertar_proveedor' );
 Route::post('/inserta-materialprueba','PruebasController@insertar_matp' );
-
 Route::get('/lista-proveedor','ProveedorController@listar_proveedor' );
 
 });
