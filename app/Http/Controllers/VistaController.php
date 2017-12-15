@@ -10,7 +10,7 @@ use DB;
 
 class VistaController extends Controller
 {
-    
+
     public function inicio()
     {
     return view('portal/airucab-inicio');
@@ -44,7 +44,8 @@ class VistaController extends Controller
     {
         $sedes=DB::select("SELECT nombre_sede,cod_sede FROM sede  order by nombre_sede;");
         $materiales=DB::select("SELECT nombre,cod_material FROM material  order by nombre;");
-    	return view('portal/airucab-pruebas',compact('sedes','materiales'));
+        $pruebas=DB::select("SELECT nombre_prueb,cod_prueba FROM Prueba order by nombre_prueb;");
+    	return view('portal/airucab-pruebas',compact('sedes','materiales','pruebas'));
     }
     public function materiaPrima()
     {
@@ -57,21 +58,20 @@ class VistaController extends Controller
     {
     	return view('portal/airucab-dAvion');
     }
-    
     public function buscarEstados($idLugar)
     {
-     return $lugares=DB::select("SELECT nombre_lugar,id_lugar from lugar where lugar_per=$idLugar and tipo_lugar='es'");     
+     return $lugares=DB::select("SELECT nombre_lugar,id_lugar from lugar where lugar_per=$idLugar and tipo_lugar='es'");
     }
 
     public function buscarMunicipios($idLugar)
     {
-     return $lugares=DB::select("SELECT nombre_lugar,id_lugar from lugar where lugar_per=$idLugar and tipo_lugar='mun'"); 
+     return $lugares=DB::select("SELECT nombre_lugar,id_lugar from lugar where lugar_per=$idLugar and tipo_lugar='mun'");
     }
 
     public function buscarParroquias($idLugar)
     {
-     return $lugares=DB::select("SELECT nombre_lugar,id_lugar from lugar where lugar_per=$idLugar and tipo_lugar='par'"); 
+     return $lugares=DB::select("SELECT nombre_lugar,id_lugar from lugar where lugar_per=$idLugar and tipo_lugar='par'");
     }
-    
+
 
 }
