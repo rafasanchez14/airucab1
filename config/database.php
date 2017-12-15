@@ -70,7 +70,7 @@ return [
             'driver' => 'pgsql',
             'host' => env('DB_HOST', 'localhost'),
             'port' => env('DB_PORT', '8024'),
-            'database' => env('DB_DATABASE', 'phu'),
+            'database' => env('DB_DATABASE', 'airucab'),
             'username' => env('DB_USERNAME', 'postgres'),
             'password' => env('DB_PASSWORD', '624865'),
             'charset' => 'utf8',
