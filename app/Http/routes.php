@@ -23,6 +23,7 @@ route::get('/','VistaController@inicio');
  route::get('pruebas','VistaController@pruebas');
  route::get('materiaPrima','VistaController@materiaPrima');
  route::get('diseñoAvion','VistaController@diseñoAvion');
+ Route::resource('client', 'clientController');
 
 route::resource('lugares','LugarController');
 

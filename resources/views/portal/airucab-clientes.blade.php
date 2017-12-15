@@ -27,15 +27,32 @@
                 <div class="row">
     <div class="col-lg-4 col-lg-offset-2  " >
 
-
+    {!! Form::open(['route' => 'client.store']) !!}
+     
       <div class="form-group">
          <label for="formGroup">Nombre</label>
-          <input class="form-control"  type="text" placeholder="Ingrese el nombre*">
+          <input class="form-control"  name="nombre" type="text" placeholder="Ingrese el nombre*">
       </div>
 
       <div class="form-group">
+         <label for="formGroup">Apellido</label>
+          <input class="form-control"  name="apellido" type="text" placeholder="Ingrese el apellido*">
+      </div>
+
+      <div class="form-group">
+         <label for="formGroup">DNI</label>
+          <input class="form-control"  name="id" type="text" placeholder="Ingrese su DNI*">
+      </div>
+
+      <div class="form-group">
+         <label for="formGroup">RIF</label>
+          <input class="form-control"  name="rif" type="text" placeholder="Ingrese el rif*">
+      </div>
+
+
+      <div class="form-group">
          <label for="formGroup">pais</label>
-         <select name= "pais" id="pais" class="form-control" required>
+         <select name= "lugar" id="pais" class="form-control" required>
             <option value="">Seleccione el pais donde reside</option>
             @foreach($lugares as $lugar)
             <option value="{{$lugar->id_lugar}}">{{$lugar->nombre_lugar}}</option>
@@ -64,7 +81,7 @@
 
       <div class="form-group">
          <label for="formGroup">Monto acreditado</label>
-          <input class="form-control"  type="text" placeholder="Ingrese el apellido*">
+          <input class="form-control"  name="monto" type="text" placeholder="Ingrese el apellido*">
       </div>
 
 
@@ -77,6 +94,13 @@
 <div class="form-group " id="phones">
 
 <label for="formGroup">Telefono</label>
+<<<<<<< HEAD
+       <div class="form-inline"> 
+          <input class="form-control" name="cod[]" type="text" placeholder="Cod Area*">
+          <input class="form-control" name="phone[]" type="text" placeholder="Ingrese el telefono*">
+       <button type="button" class="btn btn-default addButton" onclick="dynamic_phones();" > <i class="fa fa-plus"></i> </button>
+     </div>
+=======
 
  <div class="input-group">
      <input class="form-control"  type="text" placeholder="Ingrese el telefono*">
@@ -85,30 +109,51 @@
         </span>
   </div>
 
+>>>>>>> 6a7e606bd55461eb8f140c3c357eb2bfd094111c
 </div>
 
 <div class="form-group" id="mail">
       <label for="formGroup">Correo electronico</label>
+<<<<<<< HEAD
+<<<<<<< HEAD
+         <div class="form-inline"> 
+          <input class="form-control" name="correo[]" type="text" placeholder="Ingrese su correo*">
+          <button type="button" class="btn btn-default" onclick="dynamic_mail();" > <i class="fa fa-plus"></i> </button>
+       </div>
+=======
+=======
+>>>>>>> 6a7e606bd55461eb8f140c3c357eb2bfd094111c
         <div class="input-group">
           <input class="form-control"  type="text" placeholder="Ingrese su correo*">
         <span class="input-group-btn">
            <button type="button" class="btn btn-default addButton" onclick="dynamic_mail();" > <i class="fa fa-plus"></i> </button>
         </span>
       </div>
+>>>>>>> 6a7e606bd55461eb8f140c3c357eb2bfd094111c
 </div>
 
 <div class="form-group" id="web">
          <label for="formGroup">Pagina web</label>
+<<<<<<< HEAD
+<<<<<<< HEAD
+          <div class="form-inline"> 
+            <input class="form-control" name="web[]" type="text" placeholder="Ingrese su pagina web*">
+            <button type="button" class="btn btn-default addButton" onclick="dynamic_web();" > <i class="fa fa-plus"></i> </button>
+         </div>
+=======
+=======
+>>>>>>> 6a7e606bd55461eb8f140c3c357eb2bfd094111c
          <div class="input-group">
           <input class="form-control"  type="text" placeholder="Ingrese su pagina web*">
             <span class="input-group-btn">
            <button type="button" class="btn btn-default addButton" onclick="dynamic_web();" > <i class="fa fa-plus"></i> </button>
           </span>
       </div>
+>>>>>>> 6a7e606bd55461eb8f140c3c357eb2bfd094111c
 </div>
         <div class="form-group">
                  <label for="formGroup">Fecha de incio</label>
-                <input type="date" class="form-control" step="1" min="1940-01-01" max="2017-30-06" name="fecha_ini" id="fecha_ini" placeholder="Ingresa la fecha de inicio" >
+                <input type="date" name="date" class="form-control" step="1" min="1940-01-01" max="2017-30-06" name="fecha_ini" id="fecha_ini" placeholder="Ingresa la fecha de inicio" >
             </div>
 
 
@@ -135,6 +180,11 @@
 
         </div>
 
+<<<<<<< HEAD
+      {!! Form::close() !!}
+
+=======
+>>>>>>> 6a7e606bd55461eb8f140c3c357eb2bfd094111c
         <script>
               var add = 1;
               function dynamic_phones() {
@@ -143,7 +193,7 @@
               var divtest = document.createElement("div");
 	            divtest.setAttribute("class", "form-group removeclass"+add);
 	            var rdiv = 'removeclass'+add;
-              divtest.innerHTML = '<div class="form-group "> <label for="formGroup">Telefono</label> <div class="input-group">  <input class="form-control"  type="text" placeholder="Ingrese el telefono *"> <span class="input-group-btn"> <button type="button" class="btn btn-danger" onclick="remove_dynamic_phones('+ add +');" > <i class="fa fa-minus"></i> </button>  </span> </div></div>';
+              divtest.innerHTML = '<div class="form-group "> <label for="formGroup">Telefono</label> <div class="form-inline"> <input class="form-control"  type="text" placeholder="Cod Area*"> <input class="form-control"  type="text" placeholder="Ingrese el telefono *">  <button type="button" class="btn btn-danger" onclick="remove_dynamic_phones('+ add +');" > <i class="fa fa-minus"></i> </button> </div></div>';
               objTo.appendChild(divtest)
           }
 
@@ -161,7 +211,7 @@
               var divtest = document.createElement("div");
 	            divtest.setAttribute("class", "form-group removeclass"+add);
 	            var rdiv = 'removeclass'+add;
-              divtest.innerHTML = '<div class="form-group "> <label for="formGroup">Correo electronico</label> <div class="input-group">  <input class="form-control"  type="text" placeholder="Ingrese su correo *"> <span class="input-group-btn"> <button type="button" class="btn btn-danger" onclick="remove_dynamic_mail('+ add +');" > <i class="fa fa-minus"></i> </button>  </span> </div></div>';
+              divtest.innerHTML = '<div class="form-group "> <label for="formGroup">Correo electronico</label> <div class="form-inline">  <input class="form-control"  type="text" placeholder="Ingrese su correo *"> <button type="button" class="btn btn-danger" onclick="remove_dynamic_mail('+ add +');" > <i class="fa fa-minus"></i> </button> </div></div>';
               objTo.appendChild(divtest)
           }
 
@@ -179,7 +229,7 @@
               var divtest = document.createElement("div");
 	            divtest.setAttribute("class", "form-group removeclass"+add);
 	            var rdiv = 'removeclass'+add;
-              divtest.innerHTML = '<div class="form-group "> <label for="formGroup">Pagina web</label> <div class="input-group">  <input class="form-control"  type="text" placeholder="Ingrese su pagina web *"> <span class="input-group-btn"> <button type="button" class="btn btn-danger" onclick="remove_dynamic_web('+ add +');" > <i class="fa fa-minus"></i> </button>  </span> </div></div>';
+              divtest.innerHTML = '<div class="form-group "> <label for="formGroup">Pagina web</label> <div class="form-inline">  <input class="form-control"  type="text" placeholder="Ingrese su pagina web *"> <button type="button" class="btn btn-danger" onclick="remove_dynamic_web('+ add +');" > <i class="fa fa-minus"></i></div></div>';
               objTo.appendChild(divtest)
           }
 
