@@ -24,20 +24,29 @@
               <div class="container-fluid " id="margenSubmenu">
   <div class="row ">
     <div class="col-lg-4 col-lg-offset-4 " id="home">
-
+<form class="" action="/inserta-materialprueba" method="post">
       <div class="form-group">
-         <label for="formGroup">Nombre</label>
-          <input class="form-control"  type="text" placeholder="Ingrese el nombre*">
+        <label for="formGroup">Pruebas </label>
+          <select name= "prueba" id="prueba" class="form-control" required>
+            <option value="">Ingrese la Prueba</option>
+            @foreach($pruebas as $prueba)
+            <option value="{{$prueba->cod_prueba}}">{{$prueba->nombre_prueb}}</option>
+          @endforeach
+        </select>
       </div>
       <div class="form-group">
+                 <label for="formGroup">Fecha de Inicio</label>
+                <input type="date" class="form-control" step="1" min="1940-01-01" max="2024-30-06" name="fecha_i" id="fecha_i" placeholder="Ingresa la fecha" >
+        </div>
+      <div class="form-group">
                  <label for="formGroup">Fecha de culminación</label>
-                <input type="date" class="form-control" step="1" min="1940-01-01" max="2017-30-06" name="fecha_ini" id="fecha_ini" placeholder="Ingresa la fecha" >
+                <input type="date" class="form-control" step="1" min="1940-01-01" max="2024-30-06" name="fecha_c" id="fecha_c" placeholder="Ingresa la fecha" >
         </div>
       <div class="form-group">
         <label for="formGroup">Materiales </label>
           <select name= "material" id="material" class="form-control" required>
             <option value="">Ingrese el material</option>
-            @foreach($materiales as $material) 
+            @foreach($materiales as $material)
             <option value="{{$material->cod_material}}">{{$material->nombre}}</option>
           @endforeach
         </select>
@@ -46,7 +55,7 @@
         <label for="formGroup">Sede </label>
           <select name= "sede" id="sede" class="form-control" required>
             <option value="">Ingrese la sede</option>
-            @foreach($sedes as $sede) 
+            @foreach($sedes as $sede)
             <option value="{{$sede->cod_sede}}">{{$sede->nombre_sede}}</option>
           @endforeach
         </select>
@@ -54,7 +63,7 @@
 
       <div id="margenSubmenu">
         <center><button id="botonAmarillo" type="submit" class="btn btn-default btn-block btn-lg"><span  class="fa fa-upload" aria-hidden="true"></span>  Agregar Prueba</button></center>
-
+</form>
 
 </div>
 
