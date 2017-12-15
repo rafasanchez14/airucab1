@@ -3,6 +3,7 @@
 @section('title','Pruebas')
 
 @section('content')
+
 <div class="container-fluid">
   <div class="row">
      <div class="col-lg-4 col-lg-offset-1 ">
@@ -81,13 +82,15 @@
 
 <div class="row" >
   <div class="col-lg-4 col-lg-offset-8 col-xs-10 col-xs-offset-1">
+<form class="" action="/buscarMatpru" method="GET">
     <div class="input-group" >
-      <input type="text" class="form-control" placeholder="Buscar por nombre">
-      <span class="input-group-btn ">
-        <button class="btn btn-info" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar</button>
+        <input type="text" class="form-control" name="clave"placeholder="Buscar por nombre" >
+          <span class="input-group-btn ">
+          <button  class="btn btn-info"  type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar </button>
 
       </span>
     </div>
+      </form>
   </div>
 </div>
              <div class="table-responsive" id="margenSubmenu">
@@ -181,9 +184,11 @@
 <div class="row">
     <div class="col-xs-12 col-lg-offset-4 col-lg-4" id="fondo">
       <div id="margenbotonAgregar">
-        <center><button id="botonVerde" type="submit" class="btn btn-default btn-block btn-lg"><span  class="fa fa-upload" aria-hidden="true"></span> Agregar Proveedor</button></center>
+        <center><button  id="botonVerde" type="submit" class="btn btn-default btn-block btn-lg"><span  class="fa fa-upload" aria-hidden="true"></span> Agregar Proveedor
+        </button></center>
 
       </div>
+
     </div>
 </div>
 
