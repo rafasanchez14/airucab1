@@ -19,7 +19,7 @@
           </ul>
 </div>
           <div class="tab-content " >
-            
+
 
             <div class="tab-pane fade in active" id="clientes">
 
@@ -37,12 +37,12 @@
          <label for="formGroup">pais</label>
          <select name= "pais" id="pais" class="form-control" required>
             <option value="">Seleccione el pais donde reside</option>
-            @foreach($lugares as $lugar) 
+            @foreach($lugares as $lugar)
             <option value="{{$lugar->id_lugar}}">{{$lugar->nombre_lugar}}</option>
           @endforeach
         </select>
       </div>
-     
+
       <div class="form-group">
          <label for="formGroup">estado</label>
          <select name= "estado" id="estado" class="form-control" required>
@@ -61,37 +61,51 @@
             <option value="">Seleccione la parroquia donde reside</option>
         </select>
       </div>
-      
+
       <div class="form-group">
          <label for="formGroup">Monto acreditado</label>
           <input class="form-control"  type="text" placeholder="Ingrese el apellido*">
       </div>
-      
+
 
   </div>
 
   <div class="col-lg-4">
 
-<div class="form-group">
-         <label for="formGroup">Telefono 1</label>
-          <input class="form-control"  type="text" placeholder="Ingrese el telefono 1*">
-      </div>
- <div class="form-group">
-         <label for="formGroup">Telefono 2</label>
-          <input class="form-control"  type="text" placeholder="Ingrese el telefono 2*">
-      </div>
 
 
-<div class="form-group">
-         <label for="formGroup">Correo electronico</label>
+<div class="form-group " id="phones">
+
+<label for="formGroup">Telefono</label>
+
+ <div class="input-group">
+     <input class="form-control"  type="text" placeholder="Ingrese el telefono*">
+        <span class="input-group-btn">
+        <button type="button" class="btn btn-default addButton" onclick="dynamic_phones();" > <i class="fa fa-plus"></i> </button>
+        </span>
+  </div>
+
+</div>
+
+<div class="form-group" id="mail">
+      <label for="formGroup">Correo electronico</label>
+        <div class="input-group">
           <input class="form-control"  type="text" placeholder="Ingrese su correo*">
+        <span class="input-group-btn">
+           <button type="button" class="btn btn-default addButton" onclick="dynamic_mail();" > <i class="fa fa-plus"></i> </button>
+        </span>
       </div>
+</div>
 
-<div class="form-group">
+<div class="form-group" id="web">
          <label for="formGroup">Pagina web</label>
+         <div class="input-group">
           <input class="form-control"  type="text" placeholder="Ingrese su pagina web*">
+            <span class="input-group-btn">
+           <button type="button" class="btn btn-default addButton" onclick="dynamic_web();" > <i class="fa fa-plus"></i> </button>
+          </span>
       </div>
-
+</div>
         <div class="form-group">
                  <label for="formGroup">Fecha de incio</label>
                 <input type="date" class="form-control" step="1" min="1940-01-01" max="2017-30-06" name="fecha_ini" id="fecha_ini" placeholder="Ingresa la fecha de inicio" >
@@ -117,9 +131,66 @@
             </div>
             </div>
 
-      
+
 
         </div>
+
+        <script>
+              var add = 1;
+              function dynamic_phones() {
+              add++;
+              var objTo = document.getElementById('phones')
+              var divtest = document.createElement("div");
+	            divtest.setAttribute("class", "form-group removeclass"+add);
+	            var rdiv = 'removeclass'+add;
+              divtest.innerHTML = '<div class="form-group "> <label for="formGroup">Telefono</label> <div class="input-group">  <input class="form-control"  type="text" placeholder="Ingrese el telefono *"> <span class="input-group-btn"> <button type="button" class="btn btn-danger" onclick="remove_dynamic_phones('+ add +');" > <i class="fa fa-minus"></i> </button>  </span> </div></div>';
+              objTo.appendChild(divtest)
+          }
+
+            function remove_dynamic_phones(rid) {
+	          $('.removeclass'+rid).remove();
+          }
+        </script>
+
+
+         <script>
+              var add = 1;
+              function dynamic_mail() {
+              add++;
+              var objTo = document.getElementById('mail')
+              var divtest = document.createElement("div");
+	            divtest.setAttribute("class", "form-group removeclass"+add);
+	            var rdiv = 'removeclass'+add;
+              divtest.innerHTML = '<div class="form-group "> <label for="formGroup">Correo electronico</label> <div class="input-group">  <input class="form-control"  type="text" placeholder="Ingrese su correo *"> <span class="input-group-btn"> <button type="button" class="btn btn-danger" onclick="remove_dynamic_mail('+ add +');" > <i class="fa fa-minus"></i> </button>  </span> </div></div>';
+              objTo.appendChild(divtest)
+          }
+
+            function remove_dynamic_mail(rid) {
+	          $('.removeclass'+rid).remove();
+          }
+        </script>
+
+
+         <script>
+              var add = 1;
+              function dynamic_web() {
+              add++;
+              var objTo = document.getElementById('web')
+              var divtest = document.createElement("div");
+	            divtest.setAttribute("class", "form-group removeclass"+add);
+	            var rdiv = 'removeclass'+add;
+              divtest.innerHTML = '<div class="form-group "> <label for="formGroup">Pagina web</label> <div class="input-group">  <input class="form-control"  type="text" placeholder="Ingrese su pagina web *"> <span class="input-group-btn"> <button type="button" class="btn btn-danger" onclick="remove_dynamic_web('+ add +');" > <i class="fa fa-minus"></i> </button>  </span> </div></div>';
+              objTo.appendChild(divtest)
+          }
+
+            function remove_dynamic_web(rid) {
+	          $('.removeclass'+rid).remove();
+          }
+        </script>
+
+
+
+
 
 
 @endsection
