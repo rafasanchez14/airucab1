@@ -94,22 +94,24 @@
   <div id="height">
   <table class="table table-fixed">
     <thead id="textColor">
-        <th class="col-xs-3">NOMBRE</th>
-        <th class="col-xs-2 center">CULMINACIÓN</th>
-        <th class="col-xs-3 center">MATERIALES</th>
-         <th class="col-xs-2 center">ESTADO</th>
-        <th class="col-xs-2 center">SEDE</th>
+
+        <th class="col-xs-1 center">CODIGO PRUEBA</th>
+        <th class="col-xs-3 center">NOMBRE</th>
+        <th class="col-xs-2 center">MATERIALES</th>
+        <th class="col-xs-3 center">CULMINACIÓN</th>
+        <th class="col-xs-3 center">SEDE</th>
     </thead>
 
+  @foreach($pruebamat as $pm)
     <tbody id="margenPregunta">
-    <td class="col-xs-3">Prueba 1</td>
-      <td class="col-xs-2 center">10/11/2017</td>
-      <td class="col-xs-3 center">Tornillos </td>
-      <td class="col-xs-2 center">En proceso </td>
-      <td class="col-xs-2 center">Maracay </td>
 
-
+      <td class="col-xs-1">{{$pm->cod_pruebamat}}</td>
+      <td class="col-xs-3 center">{{$pm->nombre_prueb}}</td>
+      <td class="col-xs-2 center">{{$pm->nombre}} </td>
+      <td class="col-xs-3 center">{{$pm->fechafin}}</td>
+      <td class="col-xs-3 center">{{$pm->nombre_sede}}</td>
     </tbody>
+            @endforeach
   </table>
   </div>
 </div>
