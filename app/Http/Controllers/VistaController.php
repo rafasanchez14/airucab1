@@ -23,6 +23,14 @@ class VistaController extends Controller
     	return view('portal/airucab-registro',compact('lugares','sedes','lugaresb'));
     }
 
+    public function beneficiarios()
+    {
+      $personal=DB::select("SELECT id_personal, id_personal||' '||nombre_personal||' '||apellido_personal as perso from personal;");
+      $sedes=DB::select("SELECT nombre_sede,cod_sede FROM sede  order by nombre_sede;");
+       $lugares=DB::select("SELECT nombre_lugar,id_lugar FROM lugar WHERE tipo_lugar='pa' order by nombre_lugar;");
+     return view('portal/airucab-beneficiario',compact('lugares','sedes','personal'));
+    }
+
     public function clientes()
     {
         $lugares=DB::select("SELECT nombre_lugar,id_lugar FROM lugar WHERE tipo_lugar='pa' order by nombre_lugar;");
