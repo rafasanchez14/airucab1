@@ -25,6 +25,7 @@ route::get('/','VistaController@inicio');
  route::get('diseñoAvion','VistaController@diseñoAvion');
 
 route::resource('lugares','LugarController');
+route::resource('lugaresb','LugarController');
 Route::get('/buscarEstado/{id}/pertenece','VistaController@buscarEstados');
 Route::get('/buscarMatpru','PruebasController@buscarMP');
 Route::get('/buscarMunicipio/{id}/pertenece','VistaController@buscarMunicipios');
@@ -32,6 +33,7 @@ Route::get('/buscarParroquia/{id}/pertenece','VistaController@buscarParroquias')
 Route::post('/inserta-cliente','clientController@insertar_cliente' );
 Route::post('/inserta-proveedor','ProveedorController@insertar_proveedor' );
 Route::post('/inserta-materialprueba','PruebasController@insertar_matp' );
+Route::post('/inserta-personal','PersonalController@insertar_pers' );
 Route::get('/lista-proveedor','ProveedorController@listar_proveedor' );
 
 });
