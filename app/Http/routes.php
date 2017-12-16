@@ -18,6 +18,7 @@ Route::group(['middleware' => ['web']], function () {
 route::get('/','VistaController@inicio');
  route::get('registro','VistaController@registro');
  route::get('clientes','VistaController@clientes');
+route::get('beneficiarios','VistaController@beneficiarios');
  route::get('proveedores','VistaController@proveedores');
  route::get('sedes','VistaController@sedes');
  route::get('pruebas','VistaController@pruebas');
@@ -34,6 +35,7 @@ Route::post('/inserta-cliente','clientController@insertar_cliente' );
 Route::post('/inserta-proveedor','ProveedorController@insertar_proveedor' );
 Route::post('/inserta-materialprueba','PruebasController@insertar_matp' );
 Route::post('/inserta-personal','PersonalController@insertar_pers' );
+Route::post('/inserta-bene','PersonalController@insertar_bene' );
 Route::get('/lista-proveedor','ProveedorController@listar_proveedor' );
 
 });
