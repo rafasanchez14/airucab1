@@ -40,11 +40,7 @@ public function insertar_pers(Request $request){
       /*experiencia*/
 
   /*Beneficiario*/
-  $nombre_bene=$request->nombre_bene;
-  $apellido_bene=$request->apellido_bene;
-  $telefonob[]=$request->telefonob;
-  $parroquiab=$request->telefono;
-  $codareab[]=$request->codareab;
+
 /*beneficiario*/
 
   $mail=$mail[0];
@@ -132,6 +128,48 @@ while ($i<$x)
  return view('portal/airucab-registro',compact('lugares','sedes','lugaresb'));
 
 }
+
+public function insertar_bene(Request $request)
+{
+  $cedula=$request->cedula;
+  $nombre_bene=$request->nombre_bene;
+  $apellido_bene=$request->apellido_bene;
+  $telefono[]=$request->telefono;
+  $parroquia=$request->parroquia;
+  $codarea[]=$request->codarea;
+  $personal=$request->perso;
+  $telefono=$telefono[0];
+  $codarea=$codarea[0];
+  DB::insert('INSERT INTO beneficiario(
+            id_bene, nombre_bene, apelldido_bene, id_lugar, cod_personal)
+    VALUES (?, ?, ?, ?, ?)',[$cedula,$nombre_bene,$apellido_bene,$parroquia,$personal]);
+    $i=0;
+    $x=count($telefono);
+    if ($telefono[0]!='') {
+    while ($i<$x)
+        {
+    $codt=DB::select("SELECT cod_telf from telefono
+    order by cod_telf desc limit 1");
+            foreach ($codt as $key)
+            {
+              $ct=$key->cod_telf;
+            }
+            $ct=intval($ct);
+            $ct=$ct+1;
+
+            DB::insert('INSERT INTO telefono
+            (cod_telf,cod_area, numerotelf, id_bene)
+            VALUES (?,?, ?, ?)', [$ct,$codarea[$i],$telefono[$i],$cedula]);
+            $i=$i+1;
+        }
+    }
+
+    $personal=DB::select("SELECT id_personal, id_personal||' '||nombre_personal||' '||apellido_personal as perso from personal;");
+    $sedes=DB::select("SELECT nombre_sede,cod_sede FROM sede  order by nombre_sede;");
+     $lugares=DB::select("SELECT nombre_lugar,id_lugar FROM lugar WHERE tipo_lugar='pa' order by nombre_lugar;");
+   return view('portal/airucab-beneficiario',compact('lugares','sedes','personal'));
+  }
+
 
 
 
