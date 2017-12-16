@@ -12,11 +12,12 @@
 
 </div>
 <div class="container " id="margenSubmenu">
-          <ul class="nav nav-tabs nav-justified ">
-            <li ><a id="Amarillo" href="/registro" >Personal</a></li>
-            <li class="active" ><a id="Azul" href="/clientes" > Clientes</a></li>
-            <li id="margenPregunta"><a id="Verde" href=/proveedores>Proveedores</a></li>
-          </ul>
+  <ul class="nav nav-tabs nav-justified ">
+    <li class="" ><a id="Amarillo" href="/registro" >Personal</a></li>
+    <li class="" ><a id="Azul" href="/beneficiarios" >Beneficiario</a></li>
+    <li class="active"><a id="Azul" href="/clientes" > Clientes</a></li>
+    <li id="margenPregunta"><a id="Verde" href=/proveedores>Proveedores</a></li>
+  </ul>
 </div>
           <div class="tab-content " >
 
