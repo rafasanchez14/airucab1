@@ -21,24 +21,30 @@
           <div class="tab-content " >
             <div class="tab-pane fade in active" id="home">
 
-              <div class="container-fluid " id="margenSubmenu">
+    <div class="container-fluid " id="margenSubmenu">
   <div class="row ">
     <div class="col-lg-4 col-lg-offset-2 col-xs-12 " id="home">
 
       <form class="" action="/inserta-personal" method="post">
-
-
-      <div class="form-group">
+        <div class="form-group">
          <label for="formGroup">Cedula</label>
-          <input class="form-control"  type="text" placeholder="Ingrese la cédula*">
+          <input class="form-control"  name="cedula"type="text" placeholder="Ingrese la cédula*">
       </div>
       <div class="form-group">
          <label for="formGroup">Nombre</label>
-          <input class="form-control"  type="text" placeholder="Ingrese el nombre*">
+          <input class="form-control"  name="nombre" type="text" placeholder="Ingrese el nombre*">
+      </div>
+      <div class="form-group">
+         <label for="formGroup">Nombre2</label>
+          <input class="form-control" name="nombre2" type="text" placeholder="Ingrese el nombre (opcional)">
       </div>
       <div class="form-group">
          <label for="formGroup">Apellido</label>
-          <input class="form-control"  type="text" placeholder="Ingrese el apellido*">
+          <input class="form-control" name="apellido" type="text" placeholder="Ingrese el apellido*">
+      </div>
+      <div class="form-group">
+         <label for="formGroup">Apellido2</label>
+          <input class="form-control"  name="apellido2" type="text" placeholder="Ingrese el apellido(opcional)">
       </div>
       <div class="form-group">
          <label for="formGroup">pais</label>
@@ -82,6 +88,16 @@
                  <label for="formGroup">Fecha de Fin</label>
                 <input type="date" class="form-control" step="1" min="1940-01-01" max="2017-30-06" name="fecha_fin" id="fecha_fin" placeholder="Ingresa la fecha de fin" >
             </div>
+
+            <div class="form-group">
+             <label for="formGroup">Sede </label>
+               <select name= "sede" id="sede" class="form-control" required>
+                 <option value="">Ingrese la sede</option>
+                 @foreach($sedes as $sede)
+                 <option value="{{$sede->cod_sede}}">{{$sede->nombre_sede}}</option>
+               @endforeach
+             </select>
+           </div>
 
       <div class="" id="phones">
 
@@ -179,22 +195,22 @@
 
             <div class="form-group">
          <label for="formGroup">Compañia</label>
-          <input class="form-control"  type="text" placeholder="Ingrese nombre de la compañia*">
+          <input class="form-control"  name="comp"type="text" placeholder="Ingrese nombre de la compañia*">
       </div>
 
       <div class="form-group">
          <label for="formGroup">Cargo</label>
-          <input class="form-control"  type="text" placeholder="Ingrese el cargo*">
+          <input class="form-control"  name="cargo" type="text" placeholder="Ingrese el cargo*">
       </div>
 
             <div class="form-group">
                  <label for="formGroup">Fecha de ingreso</label>
-                <input type="date" class="form-control" step="1" min="1940-01-01" max="2017-30-06" name="fecha_ini" id="fecha_ini" placeholder="Ingresa la fecha de ingreso" >
+                <input type="date" class="form-control" step="1" min="1940-01-01" max="2017-30-06" name="fecha_ingr" id="fecha_ini" placeholder="Ingresa la fecha de ingreso" >
             </div>
 
             <div class="form-group">
                 <label for="formGroup">Fecha final</label>
-                <input type="date" class="form-control" step="1" min="1940-01-01" max="2017-30-06" name="fecha_fin" id="fecha_fin" placeholder="Ingresa la fecha final" >
+                <input type="date" class="form-control" step="1" min="1940-01-01" max="2017-30-06" name="fecha_final" id="fecha_fin" placeholder="Ingresa la fecha final" >
             </div>
       </div>
 
@@ -203,24 +219,64 @@
         <h3 id="subtitulo">Agregar Beneficiario</h3>
 
             <div class="form-group">
-         <label for="formGroup">Compañia</label>
-          <input class="form-control"  type="text" placeholder="Ingrese nombre de la compañia*">
+         <label for="formGroup">Nombre</label>
+          <input class="form-control" name="nombre_bene" type="text" placeholder="Ingrese nombre*">
       </div>
 
       <div class="form-group">
-         <label for="formGroup">Cargo</label>
-          <input class="form-control"  type="text" placeholder="Ingrese el cargo*">
-      </div>
+   <label for="formGroup">Apellido</label>
+    <input class="form-control"  name="apellido_bene" type="text" placeholder="Ingrese nombre*">
+  </div>
 
-            <div class="form-group">
-                 <label for="formGroup">Fecha de ingreso</label>
-                <input type="date" class="form-control" step="1" min="1940-01-01" max="2017-30-06" name="fecha_ini" id="fecha_ini" placeholder="Ingresa la fecha de ingreso" >
-            </div>
+  <div class="form-group">
+     <label for="formGroup">pais</label>
+     <select name= "pais" id="pais" class="form-control" >
+        <option value="">Seleccione el pais donde reside</option>
+        @foreach($lugaresb as $lugarb)
+        <option value="{{$lugarb->id_lugar}}">{{$lugarb->nombre_lugar}}</option>
+      @endforeach
+    </select>
+  </div>
 
+  <div class="form-group">
+     <label for="formGroup">estado</label>
+     <select name= "estado" id="estado" class="form-control" >
+        <option value="">Seleccione el estado donde reside</option>
+    </select>
+  </div>
+   <div class="form-group">
+     <label for="formGroup">Municipio</label>
+     <select name= "municipio" id="municipio" class="form-control" >
+        <option value="">Seleccione el municipio donde reside</option>
+    </select>
+  </div>
+  <div class="form-group">
+     <label for="formGroup">Parroquia</label>
+     <select name= "parroquiab" id="parroquia" class="form-control" >
+        <option value="">Seleccione la parroquia donde reside</option>
+    </select>
+  </div>
+
+  <div class="" id="phonesb">
+
+  <label for="formGroup-lg">Telefono</label>
+   <div class="row">
+     <div class="col-xs-4">
+       <div class="form-group">
+              <input class="form-control" name="codareab[]" type="text" placeholder="Cod Area*">
+          </div>
+   </div>
+              <div class="col-xs-4">
             <div class="form-group">
-                <label for="formGroup">Fecha final</label>
-                <input type="date" class="form-control" step="1" min="1940-01-01" max="2017-30-06" name="fecha_fin" id="fecha_fin" placeholder="Ingresa la fecha final" >
-            </div>
+                      <input class="form-control"  name="telefonob[]" type="text" placeholder="telefonob*">
+                     </div>
+              </div>
+                      <div class="col-xs-4">
+          <button type="button" class="btn btn-default addButton" onclick="dynamic_phonesb();" > <i class="fa fa-plus"></i> </button>
+          </div>
+  </div>
+  </div>
+
       </div>
   </div>
 </div>
@@ -293,6 +349,25 @@
             }
 
               function remove_dynamic_rs(rid) {
+              $('.removeclass'+rid).remove();
+            }
+          </script>
+
+          <script>
+                var add = 1;
+                function dynamic_phonesb() {
+                add++;
+                var objTo = document.getElementById('phonesb')
+                var divtest = document.createElement("div");
+                divtest.setAttribute("class", "form-group removeclass"+add);
+                var rdiv = 'removeclass'+add;
+                divtest.innerHTML = '<div class="form-group "> <div class="row"> <div class="col-lg-4"> <input class="form-control" name="codareab[]" type="text" placeholder="Cod Area*"></div>'+
+                      ' <div class="col-xs-4"> <input class="form-control" name="telefonob[]" type="text" placeholder="Ingrese el telefonob*">'+
+                            ' </div> <div class="col-xs-4"> <button type="button" class="btn btn-danger" onclick="remove_dynamic_phonesb('+ add +');" > <i class="fa fa-minus"></i> </button></span> </div></div> </div>';
+                objTo.appendChild(divtest)
+            }
+
+              function remove_dynamic_phonesb(rid) {
               $('.removeclass'+rid).remove();
             }
           </script>
