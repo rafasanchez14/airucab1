@@ -46,8 +46,6 @@ public function insertar_pers(Request $request){
   $mail=$mail[0];
   $telefono=$telefono[0];
   $codarea=$codarea[0];
-  $telefonob=$telefonob[0];
-  $codareab=$codareab[0];
   $reds=$reds[0];
   $experiencia="trabajo en ".$comp." durante ".$fechaingr." ".$fecha_final." como ".$cargo;
     DB::insert('INSERT INTO personal(
