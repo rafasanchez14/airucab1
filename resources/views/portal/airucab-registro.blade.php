@@ -23,8 +23,9 @@
 
               <div class="container-fluid " id="margenSubmenu">
   <div class="row ">
-   {!!Form::open(['route'=>'lugares.store','method'=>'POST'])!!}
     <div class="col-lg-4 col-lg-offset-2 col-xs-12 " id="home">
+
+      <form class="" action="/inserta-personal" method="post">
 
 
       <div class="form-group">
@@ -72,59 +73,87 @@
   </div>
 
   <div class="col-lg-4"  id="home">
+    <div class="form-group">
+             <label for="formGroup">Fecha de incio</label>
+            <input type="date" class="form-control" step="1" min="1940-01-01" max="2017-30-06" name="fecha_ini" id="fecha_ini" placeholder="Ingresa la fecha de inicio" >
 
-  <div class="form-group">
-        <label for="formGroup">Sexo</label>
-          <select name= "sexo" id="sexo" class="form-control" required>
-            <option value="">Seleccione el sexo</option>
-            <option value="Masculino"> Masculino</option>
-            <option value="Femenino"> Femenino</option>
-        </select>
-      </div>
+        </div>
+        <div class="form-group">
+                 <label for="formGroup">Fecha de Fin</label>
+                <input type="date" class="form-control" step="1" min="1940-01-01" max="2017-30-06" name="fecha_fin" id="fecha_fin" placeholder="Ingresa la fecha de fin" >
+            </div>
 
- <div class="form-group">
-         <label for="formGroup">Telefono</label>
-          <input class="form-control"  type="text" placeholder="Ingrese el telefono*">
-      </div>
+      <div class="" id="phones">
 
- <div class="form-group">
-         <label for="formGroup">Años de servicio</label>
-          <input class="form-control"  type="text" placeholder="Ingrese los años de servicio*">
+      <label for="formGroup-lg">Telefono</label>
+       <div class="row">
+         <div class="col-xs-4">
+           <div class="form-group">
+                  <input class="form-control" name="codarea[]" type="text" placeholder="Cod Area*">
+              </div>
+       </div>
+                  <div class="col-xs-4">
+                <div class="form-group">
+                          <input class="form-control"  name="telefono[]" type="text" placeholder="Telefono*">
+                         </div>
+                  </div>
+                          <div class="col-xs-4">
+              <button type="button" class="btn btn-default addButton" onclick="dynamic_phones();" > <i class="fa fa-plus"></i> </button>
+              </div>
       </div>
+    </div>
 
       <div class="form-group">
         <label for="formGroup">Titulación </label>
-          <select name= "sexo" id="sexo" class="form-control" required>
+          <select name= "titulación" id="titulación" class="form-control" required>
             <option value="">Ingrese su nivel de estudio</option>
             <option value="Bachiller"> Bachiller</option>
             <option value="Universitario"> Universitario</option>
         </select>
       </div>
-<div class="form-group">
-         <label for="formGroup">Correo electronico</label>
-          <input class="form-control"  type="text" placeholder="Ingrese su correo*">
+      <div class="form-group" id="mail">
+            <label for="formGroup">Correo electronico</label>
+              <div class="input-group">
+                <input class="form-control" id="mail" name="mail[]" type="text" placeholder="Ingrese su correo*">
+              <span class="input-group-btn">
+                 <button type="button" class="btn btn-default addButton" onclick="dynamic_mail();" > <i class="fa fa-plus"></i> </button>
+              </span>
+            </div>
       </div>
 
-<div class="form-group">
-         <label for="formGroup">Redes Sociales</label>
-          <input class="form-control"  type="text" placeholder="Ingrese sus redes socialeslos años de servicio*">
-      </div>
-
+      <div class="form-group" id="red">
+        <label for="formGroup">Red Social</label>
+        <div class="row">
+          <div class="col-xs-4">
+            <div class="form-group">
+              <select name= "plataforma" id="plataforma" class="form-control" required>
+                <option value="">Red social</option>
+                <option value="Facebook"> Facebook</option>
+                <option value="Instagram"> Instagram</option>
+                <option value="Linkedin"> Linkedin</option>
+                <option value="Google+"> Google+</option>
+                <option value="Twitter"> Twitter</option>
+                <option value="Snapchat"> Snapchat</option>
+            </select>
+             </div>
+              </div>
+                   <div class="col-xs-4">
+                       <div class="form-group">
+                   <input class="form-control"  name="red[]" id="red" type="text" placeholder="User*">
+                   </div>
+                   </div>
+                  <div class="col-xs-4">
+                    <button type="button" class="btn btn-default addButton" onclick="dynamic_rs();" > <i class="fa fa-plus"></i> </button>
+                  </div>
+       </div>
+          </div>
 
 </div>
- {!!Form::close()!!}
 </div>
 
 
 
-<div class="row">
-    <div class="col-xs-12 col-lg-offset-4 col-lg-4" id="fondo">
-      <div id="margenSubmenu">
-        <center><button id="botonAmarillo" type="submit" class="btn btn-default btn-block btn-lg"><span  class="fa fa-upload" aria-hidden="true"></span>  Agregar Personal</button></center>
 
-      </div>
-    </div>
-</div>
 
 <div class="row">
     <div class="col-lg-4 col-lg-offset-2 col-xs-12 " id="home">
@@ -145,8 +174,33 @@
 
 <div class="row">
   <div class="col-lg-4 col-lg-offset-4" >
-      <div id="gerente">
+      <div id="exper">
         <h3 id="subtitulo">ULTIMA EXPERIENCIA LABORAL</h3>
+
+            <div class="form-group">
+         <label for="formGroup">Compañia</label>
+          <input class="form-control"  type="text" placeholder="Ingrese nombre de la compañia*">
+      </div>
+
+      <div class="form-group">
+         <label for="formGroup">Cargo</label>
+          <input class="form-control"  type="text" placeholder="Ingrese el cargo*">
+      </div>
+
+            <div class="form-group">
+                 <label for="formGroup">Fecha de ingreso</label>
+                <input type="date" class="form-control" step="1" min="1940-01-01" max="2017-30-06" name="fecha_ini" id="fecha_ini" placeholder="Ingresa la fecha de ingreso" >
+            </div>
+
+            <div class="form-group">
+                <label for="formGroup">Fecha final</label>
+                <input type="date" class="form-control" step="1" min="1940-01-01" max="2017-30-06" name="fecha_fin" id="fecha_fin" placeholder="Ingresa la fecha final" >
+            </div>
+      </div>
+
+
+      <div id="beneficiario">
+        <h3 id="subtitulo">Agregar Beneficiario</h3>
 
             <div class="form-group">
          <label for="formGroup">Compañia</label>
@@ -170,10 +224,78 @@
       </div>
   </div>
 </div>
+<div class="row">
+    <div class="col-xs-12 col-lg-offset-4 col-lg-4" id="fondo">
+      <div id="margenSubmenu">
+        <center><button id="botonAmarillo" type="submit" class="btn btn-default btn-block btn-lg"><span  class="fa fa-upload" aria-hidden="true"></span>  Agregar Personal</button></center>
+      </form>
+      </div>
+    </div>
+</div>
 
 </div>
 
             </div>
+            <script>
+                  var add = 1;
+                  function dynamic_phones() {
+                  add++;
+                  var objTo = document.getElementById('phones')
+                  var divtest = document.createElement("div");
+                  divtest.setAttribute("class", "form-group removeclass"+add);
+                  var rdiv = 'removeclass'+add;
+                  divtest.innerHTML = '<div class="form-group "> <div class="row"> <div class="col-lg-4"> <input class="form-control" name="codarea[]" type="text" placeholder="Cod Area*"></div>'+
+                        ' <div class="col-xs-4"> <input class="form-control" name="telefono[]" type="text" placeholder="Ingrese el telefono*">'+
+                              ' </div> <div class="col-xs-4"> <button type="button" class="btn btn-danger" onclick="remove_dynamic_phones('+ add +');" > <i class="fa fa-minus"></i> </button></span> </div></div> </div>';
+                  objTo.appendChild(divtest)
+              }
+
+                function remove_dynamic_phones(rid) {
+                $('.removeclass'+rid).remove();
+              }
+            </script>
+
+            <script>
+                 var add = 1;
+                 function dynamic_mail() {
+                 add++;
+                 var objTo = document.getElementById('mail')
+                 var divtest = document.createElement("div");
+                 divtest.setAttribute("class", "form-group removeclass"+add);
+                 var rdiv = 'removeclass'+add;
+                 divtest.innerHTML = '<div class="form-group "> <label for="formGroup">Correo electronico</label> <div class="input-group">  <input class="form-control"  name="mail[]" type="text" placeholder="Ingrese su correo *"> <span class="input-group-btn"> <button type="button" class="btn btn-danger" onclick="remove_dynamic_mail('+ add +');" > <i class="fa fa-minus"></i> </button>  </span> </div></div>';
+                 objTo.appendChild(divtest)
+             }
+
+               function remove_dynamic_mail(rid) {
+               $('.removeclass'+rid).remove();
+             }
+           </script>
+
+           <script>
+                var add = 1;
+                function dynamic_rs() {
+                add++;
+                var objTo = document.getElementById('red')
+                var divtest = document.createElement("div");
+                divtest.setAttribute("class", "form-group removeclass"+add);
+                var rdiv = 'removeclass'+add;
+                divtest.innerHTML = '<div class="form-group" id="red"><div class="row"> <div class="col-xs-4">'+
+                '<select name= "plataforma" id="plataforma" class="form-control">'+
+                '<option value="">Red social</option> <option value="Facebook"> Facebook</option>'+
+                '<option value="Instagram"> Instagram</option>  <option value="Linkedin"> Linkedin</option>'+
+                '<option value="Google+"> Google+</option> <option value="Twitter"> Twitter</option>'+
+                '<option value="Snapchat"> Snapchat</option></select></div>'+
+                '<div class="col-xs-4"><input class="form-control"  name="red[]" id="red" type="text" placeholder="User*">'+
+                '</div><div class="col-xs-4"><button type="button" class="btn btn-danger addButton" onclick="remove_dynamic_rs('+add+');" > <i class="fa fa-minus"></i> </button>'+
+                '</div></div></div>'
+                objTo.appendChild(divtest)
+            }
+
+              function remove_dynamic_rs(rid) {
+              $('.removeclass'+rid).remove();
+            }
+          </script>
 
 
 
