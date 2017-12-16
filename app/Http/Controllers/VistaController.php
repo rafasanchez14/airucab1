@@ -17,8 +17,10 @@ class VistaController extends Controller
     }
     public function registro()
     {
+       $sedes=DB::select("SELECT nombre_sede,cod_sede FROM sede  order by nombre_sede;");
         $lugares=DB::select("SELECT nombre_lugar,id_lugar FROM lugar WHERE tipo_lugar='pa' order by nombre_lugar;");
-    	return view('portal/airucab-registro',compact('lugares'));
+        $lugaresb=DB::select("SELECT nombre_lugar,id_lugar FROM lugar WHERE tipo_lugar='pa' order by nombre_lugar;");
+    	return view('portal/airucab-registro',compact('lugares','sedes','lugaresb'));
     }
 
     public function clientes()
