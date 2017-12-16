@@ -242,6 +242,23 @@ function  m1() {
 
               }
 
+
+
+$(document).ready(function(){
+
+      $("#exper").hide();
+      $("#beneficiario").hide();
+
+})
+function  experiencia() {
+
+     $("#exper").show(500);
+  }
+  function  beneficiario() {
+     $("#beneficiario").show(500);
+  }
+
+
 </script>
 
 
