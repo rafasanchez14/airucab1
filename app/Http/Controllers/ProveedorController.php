@@ -21,7 +21,7 @@ class ProveedorController extends Controller
       $parroquia=$request->parroquia;
       $monto=$request->montoac;
       $telefono[]=$request->telefono;
-      $mail[]=$request->mail;
+      $correo[]=$request->mail;
       $web[]=$request->web;
       $codarea[]=$request->codarea;
       $fecha=$request->fecha_ini;
@@ -37,7 +37,7 @@ class ProveedorController extends Controller
             DB::insert('INSERT into Proveedor
                        (id_proveedor,nombre,fechainic,id_lugar,montoac)
                         values (?,?,?,?,?)', [$re,$nombre,$fecha,$parroquia,$monto]);
-            $mail=$mail[0];
+            $correp=$correol[0];
             $web=$web[0];
             $telefono=$telefono[0];
             $codarea=$codarea[0];
@@ -192,38 +192,185 @@ class ProveedorController extends Controller
     public function update(Request $request, $id)
     {
 
-
-    DB::update("UPDATE proveedor set nombre=?, montoac=?,fechainic=?,id_lugar=? WHERE id_proveedor=?",array($request->nombre,$request->montoac,$request->fechainic,$request->id_lugar,$id));
-
+    DB::update("UPDATE proveedor set nombre=?, montoac=?,fechainic=?,id_lugar=?
+     WHERE id_proveedor=?",array($request->nombre,$request->montoac,$request->fechainic,$request->id_lugar,$id));
+     $telefono[]=$request->telefono;
+     $telefono=$telefono[0];
+     $codarea[]=$request->codarea;
+     $codarea=$codarea[0];
+     $mail[]=$request->mail;
+     $web[]=$request->web;
+     $web=$web[0];
+     $r=0;
             // cambio los telefonos
-            $num= count($request->telefono);
-        $id_telefono=DB::select("SELECT cod_telf from telefono where id_proveedor=$id;");
-        for($i=0;$i<$num;$i++){
-        $telefono= $request->telefono[$i];
-        DB::update('UPDATE telefono set
-        cod_area=?, numerotelf=?
-         WHERE cod_telf=?', array($request->codarea[$i],$telefono,$id_telefono[$i]->cod_telf));
-        }
+            $codmodifi=DB::select("SELECT cod_telf from telefono where id_proveedor=$id");
+            foreach ($codmodifi as $cm ) {
+            $codmod[$r]=$cm->cod_telf;
+            $r=$r+1;
+            }
+        $num= count($request->telefono);//telefonos ingresados
+        $tbd=DB::select("SELECT count(cod_telf) as cant from telefono where id_proveedor=$id");
 
-         // cambio los correos
-      $num= count($request->mail);
-      $id_mail=DB::select("SELECT id_correo  from correo where id_proveedor=$id;");
-        for($i=0;$i<$num;$i++){
-        $mail= $request->mail[$i];
-        DB::update('UPDATE correo set
-        mail=?
-        Where id_correo=?', array($mail,$id_mail[$i]->id_correo));
+        foreach ($tbd as $kt)
+        {
+          $tb=$kt->cant;
         }
+        $tb=intval($tb);
+        $r=0;
+        $i=0;
+        while ($i<$num) {
 
-        // cambio las web
-      $num= count($request->web);
-      $id_web=DB::select("SELECT id_web from web where id_proveedor=$id;");
-        for($i=0;$i<$num;$i++){
-        $web= $request->web[$i];
-        DB::update('UPDATE web set
-        url=?
-        WHERE id_web=?', array($web,$id_web[$i]->id_web));
+            $codt=DB::select("SELECT cod_telf from telefono
+                  order by cod_telf desc limit 1");
+                  foreach ($codt as $key)
+                  {
+                    $ct=$key->cod_telf;
+                  }
+                  $ct=intval($ct);
+                  $ct=$ct+1;
+
+        if (($telefono[$i]!='')&&($tb>0))
+            {
+              DB::update('UPDATE telefono set
+              cod_area=?, numerotelf=?
+              WHERE cod_telf=?; ', array($request->codarea[$i],$request->telefono[$i],$codmod[$r]));
+              $tb=$tb-1;
+              $r=$r+1;
+            }
+
+
+          if (($telefono[$i]!='')&&($tb==0))
+          {
+            $codt=DB::select("SELECT cod_telf from telefono
+                  order by cod_telf desc limit 1");
+                  foreach ($codt as $key)
+                  {
+                    $ct=$key->cod_telf;
+                  }
+                  $ct=intval($ct);
+                  $ct=$ct+1;
+            DB::insert('INSERT INTO telefono
+            (cod_telf,cod_area, numerotelf, id_proveedor)
+            VALUES (?,?, ?, ?)', [$ct,$codarea[$i],$telefono[$i],$id]);
+          }
+          $i=$i+1;
+
         }
+        $r=0;
+
+
+               // cambio la web
+               $codmodifi=DB::select("SELECT id_web from web where id_proveedor=$id");
+               foreach ($codmodifi as $cm ) {
+               $codmod[$r]=$cm->id_web;
+               $r=$r+1;
+               }
+           $num= count($request->web);//telefonos ingresados
+           $tbd=DB::select("SELECT count(id_web) as cant from web where id_proveedor=$id");
+
+           foreach ($tbd as $kt)
+           {
+             $tb=$kt->cant;
+           }
+           $tb=intval($tb);
+           $r=0;
+           $i=0;
+           while ($i<$num) {
+
+               $codt=DB::select("SELECT id_web from web
+                     order by id_web desc limit 1");
+                     foreach ($codt as $key)
+                     {
+                       $ct=$key->id_web;
+                     }
+                     $ct=intval($ct);
+                     $ct=$ct+1;
+
+           if (($web[$i]!='')&&($tb>0))
+               {
+                 DB::update('UPDATE web set
+                   url=?
+                 WHERE id_web=?; ', array($request->web[$i],$codmod[$r]));
+                 $tb=$tb-1;
+                 $r=$r+1;
+               }
+
+
+             if (($web[$i]!='')&&($tb==0))
+             {
+               $codt=DB::select("SELECT id_web from web
+                     order by id_web desc limit 1");
+                     foreach ($codt as $key)
+                     {
+                       $ct=$key->id_web;
+                     }
+                     $ct=intval($ct);
+                     $ct=$ct+1;
+               DB::insert('INSERT INTO web
+               (id_web,url, id_proveedor)
+               VALUES (?,?, ?)', [$ct,$web[$i],$id]);
+             }
+             $i=$i+1;
+
+           }
+           $r=0;
+
+
+                  // cambio la correo
+                  $codmodifi=DB::select("SELECT id_correo from correo where id_proveedor=$id");
+                  foreach ($codmodifi as $cm ) {
+                  $codmod[$r]=$cm->id_correo;
+                  $r=$r+1;
+                  }
+              $num= count($request->correo);//telefonos ingresados
+              $tbd=DB::select("SELECT count(id_correo) as cant from correo where id_proveedor=$id");
+
+              foreach ($tbd as $kt)
+              {
+                $tb=$kt->cant;
+              }
+              $tb=intval($tb);
+              $r=0;
+              $i=0;
+              while ($i<$num) {
+
+                  $codt=DB::select("SELECT id_correo from correo
+                        order by id_correo desc limit 1");
+                        foreach ($codt as $key)
+                        {
+                          $ct=$key->id_correo;
+                        }
+                        $ct=intval($ct);
+                        $ct=$ct+1;
+
+              if (($correo[$i]!='')&&($tb>0))
+                  {
+                    DB::update('UPDATE correo set
+                      mail=?
+                    WHERE id_correo=?; ', array($request->correo[$i],$codmod[$r]));
+                    $tb=$tb-1;
+                    $r=$r+1;
+                  }
+
+
+                if (($correo[$i]!='')&&($tb==0))
+                {
+                  $codt=DB::select("SELECT id_correo from correo
+                        order by id_correo desc limit 1");
+                        foreach ($codt as $key)
+                        {
+                          $ct=$key->id_correo;
+                        }
+                        $ct=intval($ct);
+                        $ct=$ct+1;
+                  DB::insert('INSERT INTO correo
+                  (id_correo,mail, id_proveedor)
+                  VALUES (?,?, ?)', [$ct,$correo[$i],$id]);
+                }
+                $i=$i+1;
+
+              }
+
          Session::flash('save','Proveedor modificado correctamente');
       return redirect('/proveedores');
     }
