@@ -40,7 +40,7 @@
       </div>
       <div class="form-group">
          <label for="formGroup">Apellido</label>
-          {!!Form::text('apellido',null,['class'=>'form-control','placeholder'=>'Ingrese el apellido*','required'])!!}
+          {!!Form::text('apellido',null,['class'=>'form-control','placeholder'=>'Ingrese el apellido*'])!!}
       </div>
 
 
@@ -119,7 +119,7 @@
 
        <div class="form-group">
          <label for="formGroup">DNI</label>
-          {!!Form::text('dni',null,['class'=>'form-control','placeholder'=>'Ingrese el dni*','required'])!!}
+          {!!Form::text('dni',null,['class'=>'form-control','placeholder'=>'Ingrese el dni*'])!!}
       </div>
 
 
@@ -129,7 +129,7 @@
 
   <div class="form-group">
          <label for="formGroup">Rif</label>
-          {!!Form::text('rif',null,['class'=>'form-control','placeholder'=>'Ingrese el rif*','required'])!!}
+          {!!Form::text('rif',null,['class'=>'form-control','placeholder'=>'Ingrese el rif*'])!!}
       </div>
 
    <div class="form-group">
