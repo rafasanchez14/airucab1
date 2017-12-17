@@ -25,10 +25,11 @@ class VistaController extends Controller
 
     public function beneficiarios()
     {
+$beneficiarios=DB::select("SELECT beneficiario.id_bene,beneficiario.nombre_bene,beneficiario.apelldido_bene,personal.id_personal||' '||personal.nombre_personal||' '||personal.apellido_personal as perso , l1.nombre_lugar as parroquia,l2.nombre_lugar as municipio,l3.nombre_lugar as estado,l4.nombre_lugar as pais from beneficiario,personal,lugar l1,lugar l2,lugar l3,lugar l4 where beneficiario.id_lugar=l1.id_lugar and (l1.lugar_per=l2.id_lugar) and (l2.lugar_per=l3.id_Lugar) and (l3.lugar_per=l4.id_Lugar) and (beneficiario.cod_personal= personal.id_personal);");
       $personal=DB::select("SELECT id_personal, id_personal||' '||nombre_personal||' '||apellido_personal as perso from personal;");
       $sedes=DB::select("SELECT nombre_sede,cod_sede FROM sede  order by nombre_sede;");
        $lugares=DB::select("SELECT nombre_lugar,id_lugar FROM lugar WHERE tipo_lugar='pa' order by nombre_lugar;");
-     return view('portal/airucab-beneficiario',compact('lugares','sedes','personal'));
+     return view('portal/airucab-beneficiario',compact('lugares','sedes','personal','beneficiarios'));
     }
 
 
