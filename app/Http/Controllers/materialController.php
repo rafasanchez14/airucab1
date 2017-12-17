@@ -33,7 +33,8 @@ class materialController extends Controller
       (nombre,descrip)
       values (?,?)', [$name,$descrip]);
 
-      return redirect()->route('material.index')->with('success','material agregado exitosamente');
+      Session::flash('save','Material creado correctamente');
+      return redirect('/material');
 
 
 
@@ -64,7 +65,8 @@ class materialController extends Controller
                          descrip=?
                          WHERE cod_material =?',[$name,$descrip,$id]);
 
-    return redirect()->route('material.index')->with('success','material modificado exitosamente');
+     Session::flash('save','Material modificado correctamente');
+     return redirect('/material');
 
 
 
@@ -79,7 +81,8 @@ class materialController extends Controller
                       from Material
                       where cod_material=?",$data1);
 
-       return redirect()->route('material.index')->with('success','material eliminado exitosamente');
+       Session::flash('save','Material eliminado correctamente');
+       return redirect('/material');
 
     }
 
