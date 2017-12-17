@@ -13,14 +13,14 @@
 </div>
 <div class="container " id="margenSubmenu">
           <ul class="nav nav-tabs nav-justified ">
-            <li class="active" ><a id="Amarillo" href="/registro" >Personal</a></li>
-            <li class="" ><a id="Azul" href="/beneficiarios" >Beneficiario</a></li>
+            <li class="active" ><a id="Amarillo" href="/personal" >Personal</a></li>
             <li ><a id="Azul" href="/clientes" > Clientes</a></li>
             <li id="margenPregunta"><a id="Verde" href=/proveedores>Proveedores</a></li>
           </ul>
 </div>
           <div class="tab-content " >
             <div class="tab-pane fade in active" id="home">
+
     <div class="container-fluid " id="margenSubmenu">
   <div class="row ">
     <div class="col-lg-4 col-lg-offset-2 col-xs-12 " id="home">
@@ -179,7 +179,14 @@
      <br><br>
     </div>
     </div>
-    
+    <div class="row">
+    <div class="col-lg-4 col-lg-offset-2 col-xs-12 " id="home">
+
+    <label for="formGroup">Agregar beneficiario</label>
+     <a id="botonVerde" onclick="beneficiario();" class="btn btn-default  boton">Beneficiario</a>
+     <br><br>
+    </div>
+    </div>
 
 <div class="row">
   <div class="col-lg-4 col-lg-offset-4" >
@@ -206,6 +213,71 @@
                 <input type="date" class="form-control" step="1" min="1940-01-01" max="2017-30-06" name="fecha_final" id="fecha_fin" placeholder="Ingresa la fecha final" >
             </div>
       </div>
+
+
+      <div id="beneficiario">
+        <h3 id="subtitulo">Agregar Beneficiario</h3>
+
+            <div class="form-group">
+         <label for="formGroup">Nombre</label>
+          <input class="form-control" name="nombre_bene" type="text" placeholder="Ingrese nombre*">
+      </div>
+
+      <div class="form-group">
+   <label for="formGroup">Apellido</label>
+    <input class="form-control"  name="apellido_bene" type="text" placeholder="Ingrese nombre*">
+  </div>
+
+  <div class="form-group">
+     <label for="formGroup">pais</label>
+     <select name= "pais" id="pais" class="form-control" >
+        <option value="">Seleccione el pais donde reside</option>
+        @foreach($lugaresb as $lugarb)
+        <option value="{{$lugarb->id_lugar}}">{{$lugarb->nombre_lugar}}</option>
+      @endforeach
+    </select>
+  </div>
+
+  <div class="form-group">
+     <label for="formGroup">estado</label>
+     <select name= "estado" id="estado" class="form-control" >
+        <option value="">Seleccione el estado donde reside</option>
+    </select>
+  </div>
+   <div class="form-group">
+     <label for="formGroup">Municipio</label>
+     <select name= "municipio" id="municipio" class="form-control" >
+        <option value="">Seleccione el municipio donde reside</option>
+    </select>
+  </div>
+  <div class="form-group">
+     <label for="formGroup">Parroquia</label>
+     <select name= "parroquiab" id="parroquia" class="form-control" >
+        <option value="">Seleccione la parroquia donde reside</option>
+    </select>
+  </div>
+
+  <div class="" id="phonesb">
+
+  <label for="formGroup-lg">Telefono</label>
+   <div class="row">
+     <div class="col-xs-4">
+       <div class="form-group">
+              <input class="form-control" name="codareab[]" type="text" placeholder="Cod Area*">
+          </div>
+   </div>
+              <div class="col-xs-4">
+            <div class="form-group">
+                      <input class="form-control"  name="telefonob[]" type="text" placeholder="telefonob*">
+                     </div>
+              </div>
+                      <div class="col-xs-4">
+          <button type="button" class="btn btn-default addButton" onclick="dynamic_phonesb();" > <i class="fa fa-plus"></i> </button>
+          </div>
+  </div>
+  </div>
+
+      </div>
   </div>
 </div>
 <div class="row">
@@ -218,12 +290,6 @@
 </div>
 
 </div>
-
-
-
-
-
-
 
             </div>
             <script>

@@ -141,14 +141,63 @@
 </div>
 
 
+</div>
+<div class="">
+  <div class="row" >
+    <div class="col-lg-4 col-lg-offset-8 col-xs-10 col-xs-offset-1">
+  <form class="" action="/buscarProv" method="GET">
+      <div class="input-group" >
+          <input type="text" class="form-control" name="clave"placeholder="Buscar por nombre" >
+            <span class="input-group-btn ">
+            <button  class="btn btn-info" id="busqueda" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar </button>
 
+        </span>
+      </div>
+        </form>
+    </div>
+  </div>
 
+<div class="table-responsive" id="margenSubmenu">
+<div id="height">
+<table class="table table-fixed">
+<thead id="textColor">
+<th class="col-xs-2 center">NOMBRE</th>
+<th class="col-xs-2 center">FECHA REGISTRO</th>
+<th class="col-xs-2 center">MONTO ACREDITADO</th>
+<th class="col-xs-3 center">LUGAR</th>
+<th class="col-xs-3 center">Accion</th>
+</thead>
 
+@foreach($proveedores as $pm)
+<tbody id="margenPregunta">
+  <th class="col-xs-2 center"><div contenteditable> {{$pm->nombre}} </div></th>
+  <th class="col-xs-2 center"><div contenteditable> {{$pm->fechainic}} </div> </th>
+  <th class="col-xs-2 center"><div contenteditable> {{$pm->montoac}} </div> </th>
+  <th class="col-xs-3 center"><div contenteditable> {{$pm->nombre_lugar}} </div> </th>
+  <th class="col-xs-3 center">
+    <div class="row">
+      <div class="col-xs-6 center formGroup">
+        <form class="" action="/modificaProv" method="post">
+          <input type="hidden" name="idprov" value="{{$pm->id_proveedor}}" >
+        <button id="" type="submit" class="btn btn-warning btn-block btn-md">Modificar</button>
+        </form>
+      </div>
 
-
-
-
-            <script>
+      <div class="col-xs-6 center form-group">
+        <form class="" action="/EliminaProv" method="post">
+          <input type="hidden" name="idprov" value="{{$pm->id_proveedor}}">
+        <button id="" type="submit" class="btn btn-danger btn-block btn-md">Eliminar </button>
+        </form>
+      </div>
+    </div>
+  </th>
+</tbody>
+@endforeach
+</table>
+</div>
+</div>
+</div>
+    <script>
                   var add = 1;
                   function dynamic_phones() {
                   add++;
@@ -184,9 +233,7 @@
                 $('.removeclass'+rid).remove();
               }
             </script>
-
-
-             <script>
+           <script>
                   var add = 1;
                   function dynamic_web() {
                   add++;
@@ -203,6 +250,15 @@
               }
             </script>
 
+            <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
+            <script type="text/javascript">
+            $(document).ready(function() {
+                $('#busqueda').click(function(){
+                    $("#tabla").load('/buscarProv');
+                });
+                ...
+            });
+            </script>
 
         </div>
 
