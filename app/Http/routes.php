@@ -28,6 +28,9 @@ Route::get('delete/{id}','materialController@destroy');
 Route::post('buscarClientes',
                 ['as' => 'buscarCliente', 'uses' => 'ClienteController@buscarC']);
 
+
+
+
 route::resource('clientes','ClienteController');
 route::resource('lugares','LugarController');
 Route::post('/modificaProv','ProveedorController@modificar_proveedor');
