@@ -115,7 +115,6 @@
                   ' </div> <div class="col-xs-4"> <button type="button" class="btn btn-danger" onclick="remove_dynamic_phones('+ add +');" > <i class="fa fa-minus"></i> </button></span> </div></div> </div>';
       objTo.appendChild(divtest)
   }
-
     function remove_dynamic_phones(rid) {
     $('.removeclass'+rid).remove();
   }
