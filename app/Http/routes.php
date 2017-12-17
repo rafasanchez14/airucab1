@@ -16,14 +16,16 @@
 
 Route::group(['middleware' => ['web']], function () {
 route::get('/','VistaController@inicio');
- route::get('registro','VistaController@registro');
- route::get('clientes','VistaController@clientes');
+route::get('registro','VistaController@registro');
+route::get('clientes','VistaController@clientes');
 route::get('beneficiarios','VistaController@beneficiarios');
- route::get('proveedores','VistaController@proveedores');
- route::get('sedes','VistaController@sedes');
- route::get('pruebas','VistaController@pruebas');
- route::get('materiaPrima','VistaController@materiaPrima');
- route::get('diseñoAvion','VistaController@diseñoAvion');
+route::get('proveedores','VistaController@proveedores');
+route::get('sedes','VistaController@sedes');
+route::get('pruebas','VistaController@pruebas');
+route::get('materiaPrima','VistaController@materiaPrima');
+route::get('diseñoAvion','VistaController@diseñoAvion');
+Route::resource('material', 'materialController');
+Route::get('delete/{id}','materialController@destroy');
 
 route::resource('lugares','LugarController');
 route::resource('lugaresb','LugarController');

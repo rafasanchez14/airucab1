@@ -31,7 +31,7 @@
       <li id="fondobarra"><a href="/" id="texto">INICIO</a></li>
 
           <li id="fondobarra"><a href="/registro" id="texto">REGISTRO</a></li>
-          <li id="fondobarra"><a href="/materiaPrima" id="texto">MATERIA PRIMA</a></li>
+          <li id="fondobarra"><a href="/materiaPrima" id="texto">MATERIALES</a></li>
           <li id="fondobarra"><a href="/pruebas" id="texto">PRUEBAS</a></li>
           <li id="fondobarra"><a href="/sedes" id="texto">SEDES</a></li>
           <li id="fondobarra"><a href="/diseñoAvion" id="texto">DISEÑO DE AVIÓN</a></li>
