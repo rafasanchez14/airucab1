@@ -1,8 +1,8 @@
 @extends('layouts.master')
-
 @section('title','Registro')
-
 @section('content')
+@include('layouts.messages') 
+
 <div class="container-fluid">
   <div class="row">
      <div class="col-lg-4 col-lg-offset-1 ">
@@ -12,60 +12,46 @@
 
 </div>
 <div class="container " id="margenSubmenu">
-  <ul class="nav nav-tabs nav-justified ">
-    <li class="" ><a id="Amarillo" href="/registro" >Personal</a></li>
-    <li class="" ><a id="Azul" href="/beneficiarios" >Beneficiario</a></li>
-    <li class="active"><a id="Azul" href="/clientes" > Clientes</a></li>
-    <li id="margenPregunta"><a id="Verde" href=/proveedores>Proveedores</a></li>
-  </ul>
+          <ul class="nav nav-tabs nav-justified ">
+            <li ><a id="Amarillo" href="/registro" >Personal</a></li>
+            <li class="active" ><a id="Azul" href="/clientes" > Clientes</a></li>
+            <li id="margenPregunta"><a id="Verde" href=/proveedores>Proveedores</a></li>
+          </ul>
 </div>
           <div class="tab-content " >
-
+            
 
             <div class="tab-pane fade in active" id="clientes">
 
             <div class="container-fluid" id="margenSubmenu" >
-                <div class="row">
+    {!!Form::open(['route'=>'clientes.store','method'=>'POST'])!!}
 
-                  <form  action='/inserta-cliente'method="post">
-            {{ csrf_field() }}
-                      <fieldset>
+                <div class="row">
     <div class="col-lg-4 col-lg-offset-2  " >
 
-    <div class="form-group">
-         <label for="formGroup">Nombre</label>
-          <input class="form-control"  name="nombre" type="text" placeholder="Ingrese el nombre*">
-      </div>
 
+      <div class="form-group">
+         <label for="formGroup">Nombre</label>
+          <input class="form-control" name="nombre_cliente" type="text" placeholder="Ingrese el nombre*">
+      </div>
       <div class="form-group">
          <label for="formGroup">Apellido</label>
-          <input class="form-control"  name="apellido" type="text" placeholder="Ingrese el apellido*">
+          <input class="form-control" name="apellido" type="text" placeholder="Ingrese el nombre*">
       </div>
-
-      <div class="form-group">
-         <label for="formGroup">DNI</label>
-          <input class="form-control"  name="id" type="text" placeholder="Ingrese su DNI*">
-      </div>
-
-      <div class="form-group">
-         <label for="formGroup">RIF</label>
-          <input class="form-control"  name="rif" type="text" placeholder="Ingrese el rif*">
-      </div>
-
 
       <div class="form-group">
          <label for="formGroup">pais</label>
-         <select name= "lugar" id="pais" class="form-control" required>
+         <select  id="pais" class="form-control" required>
             <option value="">Seleccione el pais donde reside</option>
-            @foreach($lugares as $lugar)
+            @foreach($lugares as $lugar) 
             <option value="{{$lugar->id_lugar}}">{{$lugar->nombre_lugar}}</option>
           @endforeach
         </select>
       </div>
-
+     
       <div class="form-group">
          <label for="formGroup">estado</label>
-         <select name= "estado" id="estado" class="form-control" required>
+         <select  id="estado" class="form-control" required>
             <option value="">Seleccione el estado donde reside</option>
         </select>
       </div>
@@ -77,23 +63,32 @@
       </div>
       <div class="form-group">
          <label for="formGroup">Parroquia</label>
-         <select name= "parroquia" id="parroquia" class="form-control" required>
+         <select name= "id_lugar" id="parroquia" class="form-control" required>
             <option value="">Seleccione la parroquia donde reside</option>
         </select>
       </div>
-
-      <div class="form-group">
-         <label for="formGroup">Monto acreditado</label>
-          <input class="form-control"  name="monto" type="text" placeholder="Ingrese el apellido*">
+     
+       <div class="form-group">
+         <label for="formGroup">DNI</label>
+          <input class="form-control" name="dni" type="text" placeholder="Ingrese el apellido*" required>
       </div>
-
+      
 
   </div>
 
   <div class="col-lg-4">
 
-          <div id="newlink">
-            <div class="" id="phones">
+  <div class="form-group">
+         <label for="formGroup">Rif</label>
+          <input class="form-control" name="rif" type="text" placeholder="Ingrese el apellido*" required>
+      </div>
+
+   <div class="form-group">
+         <label for="formGroup">Monto acreditado</label>
+          <input class="form-control" name="montoac" type="text" placeholder="Ingrese el apellido*" required>
+      </div>
+
+<div class="" id="phones">
 
             <label for="formGroup-lg">Telefono</label>
              <div class="row">
@@ -101,7 +96,7 @@
                  <div class="form-group">
                         <input class="form-control" name="codarea[]" type="text" placeholder="Cod Area*">
                     </div>
-             </div>
+                </div>
                         <div class="col-xs-4">
                       <div class="form-group">
                                 <input class="form-control"  name="telefono[]" type="text" placeholder="Telefono*">
@@ -110,15 +105,13 @@
                                 <div class="col-xs-4">
 
                     <button type="button" class="btn btn-default addButton" onclick="dynamic_phones();" > <i class="fa fa-plus"></i> </button>
-                    </span>
+                    
                     </div>
             </div>
           </div>
-            </div>
 
 
-
-            <div class="form-group" id="mail">
+<div class="form-group" id="mail">
                   <label for="formGroup">Correo electronico</label>
                     <div class="input-group">
                       <input class="form-control" id="mail" name="mail[]" type="text" placeholder="Ingrese su correo*">
@@ -140,10 +133,10 @@
 
         <div class="form-group">
                  <label for="formGroup">Fecha de incio</label>
-                <input type="date" class="form-control" step="1" min="1940-01-01" max="2017-30-06" name="fecha_ini" id="fecha_ini" placeholder="Ingresa la fecha de inicio" >
-
+               <input type="text" class="form-control datepicker" name="fechaini" placeholder="Ingrese fecha de inicio*" value="{{ old('fechaini') }}" required>
             </div>
-
+             
+            
 
 
 </div>
@@ -160,17 +153,79 @@
     </div>
 </div>
 
-</fieldset>
-</form>
 
+{!!Form::close()!!} 
             </div>
             </div>
 
-
+      
 
         </div>
+<div class="container-fluid">
+  <div class="row">
+     <div class="col-lg-4 col-lg-offset-1 ">
+       <h2 id="margenSubmenu">LISTA DE CLIENTES</h2>
+     </div>
+  </div>
 
-        <script>
+</div>
+<div class="container-fluid">
+<div class="row">
+            
+              <div class="col-lg-3 col-lg-offset-8">
+                {!!Form::open(['route'=>'buscarCliente','method'=>'POST','role' => 'search'])!!}
+               <div class="input-group" >
+                {!!Form::text('nombre',null,['id'=>'nombre', 'class'=>'form-control','placeholder'=>'Buscar cliente por nombre','required'])!!}
+                <div class="input-group-btn">
+                  <button id="buscar" class="btn btn-info" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar</button>    
+                </div>
+              </div>
+              {!!Form::close()!!}
+            </div>
+          </div>
+          <br>  
+</div>
+<div class="container-fluid tabla">
+  <div class="row">
+    <div class="col-lg-10 col-lg-offset-1 ">        
+      <table class="table">
+        <thead id="botonAzul">
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Rif</th>
+          <th>Dni</th>
+          <th>Monto acreditado</th>
+          <th>País</th>
+          <th>Estado</th>
+          <th>Municipio</th>
+          <th>Parroquia</th>
+          <th></th>
+          <th></th>
+        </thead>
+        @foreach($clientes as $cliente)
+        <tbody class="well">
+          <td>{{$cliente->nombre_cliente}}</td>
+          <td>{{$cliente->apellido}}</td>
+          <td>{{$cliente->rif}}</td>
+          <td>{{$cliente->dni}}</td>
+          <td>{{$cliente->montoac}}</td>
+          <td>{{$cliente->pais}}</td>
+          <td>{{$cliente->estado}}</td> 
+          <td>{{$cliente->municipio}}</td>
+          <td>{{$cliente->parroquia}}</td>           
+          <td>{!!link_to_route('clientes.edit','Editar ',$parameters=$cliente->id_cliente,$attributes=['class'=>'btn btn-success'])!!}
+          </td>
+          <td>{!!Form::open(['route'=>['clientes.destroy',$cliente->id_cliente],'method'=>'DELETE'])!!}
+            {!!Form::submit('Eliminar',['class'=>'btn btn-danger' ])!!}
+            {!!Form::close()!!}   </td>
+        </tbody>
+        @endforeach
+      </table>
+    </div>
+  </div>
+</div>
+
+ <script>
               var add = 1;
               function dynamic_phones() {
               add++;
@@ -224,13 +279,6 @@
             $('.removeclass'+rid).remove();
           }
         </script>
-
-
-    </div>
-
-
-
-
 
 
 @endsection
