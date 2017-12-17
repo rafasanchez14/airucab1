@@ -31,6 +31,7 @@ class VistaController extends Controller
      return view('portal/airucab-beneficiario',compact('lugares','sedes','personal'));
     }
 
+
     public function clientes()
     {
         $lugares=DB::select("SELECT nombre_lugar,id_lugar FROM lugar WHERE tipo_lugar='pa' order by nombre_lugar;");
@@ -39,10 +40,11 @@ class VistaController extends Controller
 
     public function proveedores()
     {
+      $proveedores=DB::select("SELECT p.id_proveedor,p.nombre, p.fechainic, p.montoac, l.nombre_lugar from proveedor p, lugar l
+        where p.id_lugar=l.id_lugar");
         $lugares=DB::select("SELECT nombre_lugar,id_lugar FROM lugar WHERE tipo_lugar='pa' order by nombre_lugar;");
-        return view('portal/airucab-proveedores',compact('lugares'));
+        return view('portal/airucab-proveedores',compact('lugares','proveedores'));
     }
-
 
     public function sedes()
     {
