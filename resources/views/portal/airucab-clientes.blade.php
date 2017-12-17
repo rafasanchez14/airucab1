@@ -71,7 +71,7 @@
 
        <div class="form-group">
          <label for="formGroup">DNI</label>
-          <input class="form-control" name="dni" type="text" placeholder="Ingrese el apellido*" required>
+          <input class="form-control" name="dni" type="text" placeholder="Ingrese el apellido*">
       </div>
 
 
@@ -81,7 +81,7 @@
 
   <div class="form-group">
          <label for="formGroup">Rif</label>
-          <input class="form-control" name="rif" type="text" placeholder="Ingrese el apellido*" required>
+          <input class="form-control" name="rif" type="text" placeholder="Ingrese el apellido*" >
       </div>
 
    <div class="form-group">
