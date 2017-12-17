@@ -126,10 +126,14 @@ class ProveedorController extends Controller
 
     }
     /*consulta proveedores dado un id*/
-    public function consultar_proveedor($codproveedor){
+    public function consultar_proveedor(Request $request)
+    {
+      $codproveedor=$request->clave;
       $lugares=DB::select("SELECT nombre_lugar,id_lugar FROM lugar WHERE tipo_lugar='pa' order by nombre_lugar;");
-      $proveedores=DB::select("SELECT * FROM proveedor WHERE id_proveedor=$codproveedor");
-      return view('portal/airucab-proveedores',compact('lugares'),compact('proveedores'));
+      $proveedores=DB::select("SELECT p.id_proveedor,p.nombre, p.fechainic, p.montoac, l.nombre_lugar from proveedor p, lugar l
+        where p.id_lugar=l.id_lugar and p.nombre LIKE '%$codproveedor%'");
+
+      return view('portal/airucab-proveedores',compact('lugares','proveedores'));
 
     }
     public function consultar_telefono($codproveedor){
@@ -143,11 +147,21 @@ class ProveedorController extends Controller
         return null;
       }
       return $dato;
+
     }
-    
+  public function modifica_p (Request $request){}
 
 
+public function eliminar_proveedor (Request $request)
+  {
+  $codproveedor=$request->id_prov;
+  $telefonop=DB::delete("DELETE FROM proveedor WHERE id_proveedor=$codproveedor");
+  $proveedores=DB::select("SELECT p.nombre, p.fechainic, p.montoac, l.nombre_lugar from proveedor p, lugar l
+    where p.id_lugar=l.id_lugar");
+    $lugares=DB::select("SELECT nombre_lugar,id_lugar FROM lugar WHERE tipo_lugar='pa' order by nombre_lugar;");
+    return view('portal/airucab-proveedores',compact('lugares','proveedores'));
 
+  }
 
 
 
