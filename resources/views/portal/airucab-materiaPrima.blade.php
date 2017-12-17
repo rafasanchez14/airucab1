@@ -1,8 +1,8 @@
 @extends('layouts.master')
-
 @section('title','Materiales')
-
 @section('content')
+
+
 <div class="container-fluid">
   <div class="row">
      <div class="col-lg-4 col-lg-offset-1 ">
