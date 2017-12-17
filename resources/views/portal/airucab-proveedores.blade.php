@@ -3,6 +3,7 @@
 @section('title','Registro')
 
 @section('content')
+@include('layouts.messages')
 <div class="container-fluid">
   <div class="row">
      <div class="col-lg-4 col-lg-offset-1 ">
@@ -12,12 +13,11 @@
 
 </div>
 <div class="container " id="margenSubmenu">
-  <ul class="nav nav-tabs nav-justified ">
-    <li class="" ><a id="Amarillo" href="/registro" >Personal</a></li>
-    <li class="" ><a id="Azul" href="/beneficiarios" >Beneficiario</a></li>
-    <li ><a id="Azul" href="/clientes" > Clientes</a></li>
-    <li class="active" id="margenPregunta"><a id="Verde" href=/proveedores>Proveedores</a></li>
-  </ul>
+          <ul class="nav nav-tabs nav-justified ">
+            <li ><a id="Amarillo" href="/registro"  >Personal</a></li>
+            <li ><a id="Azul" href="/clientes" > Clientes</a></li>
+            <li class="active" id="margenPregunta"><a id="Verde" href=/proveedores>Proveedores</a></li>
+          </ul>
 </div>
           <div class="tab-content " >
 
@@ -65,7 +65,7 @@
       </div>
       <div class="form-group">
                <label for="formGroup">Monto Acreditado</label>
-              <input type="text" class="form-control" name="monto" id="monto" placeholder="Ingresa" >
+               {!!Form::text('montoac',null,['class'=>'form-control','placeholder'=>'Ingrese el monto acreditado*','required'])!!}
           </div>
 
   </div>
@@ -139,65 +139,73 @@
       </form>
         </div>
 </div>
+            </div>
+            </div>
 
 
-</div>
-<div class="">
-  <div class="row" >
-    <div class="col-lg-4 col-lg-offset-8 col-xs-10 col-xs-offset-1">
-  <form class="" action="/buscarProv" method="GET">
-      <div class="input-group" >
-          <input type="text" class="form-control" name="clave"placeholder="Buscar por nombre" >
-            <span class="input-group-btn ">
-            <button  class="btn btn-info" id="busqueda" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar </button>
 
-        </span>
-      </div>
-        </form>
-    </div>
+        </div>
+<div class="container-fluid">
+  <div class="row">
+     <div class="col-lg-4 col-lg-offset-1 ">
+       <h2 id="margenSubmenu">LISTA DE PROVEEDORES</h2>
+     </div>
   </div>
 
-<div class="table-responsive" id="margenSubmenu">
-<div id="height">
-<table class="table table-fixed">
-<thead id="textColor">
-<th class="col-xs-2 center">NOMBRE</th>
-<th class="col-xs-2 center">FECHA REGISTRO</th>
-<th class="col-xs-2 center">MONTO ACREDITADO</th>
-<th class="col-xs-3 center">LUGAR</th>
-<th class="col-xs-3 center">Accion</th>
-</thead>
+</div>
+<div class="container-fluid">
+<div class="row">
 
-@foreach($proveedores as $pm)
-<tbody id="margenPregunta">
-  <th class="col-xs-2 center"><div contenteditable> {{$pm->nombre}} </div></th>
-  <th class="col-xs-2 center"><div contenteditable> {{$pm->fechainic}} </div> </th>
-  <th class="col-xs-2 center"><div contenteditable> {{$pm->montoac}} </div> </th>
-  <th class="col-xs-3 center"><div contenteditable> {{$pm->nombre_lugar}} </div> </th>
-  <th class="col-xs-3 center">
-    <div class="row">
-      <div class="col-xs-6 center formGroup">
-        <form class="" action="/modificaProv" method="post">
-          <input type="hidden" name="idprov" value="{{$pm->id_proveedor}}" >
-        <button id="" type="submit" class="btn btn-warning btn-block btn-md">Modificar</button>
-        </form>
-      </div>
-
-      <div class="col-xs-6 center form-group">
-        <form class="" action="/EliminaProv" method="post">
-          <input type="hidden" name="idprov" value="{{$pm->id_proveedor}}">
-        <button id="" type="submit" class="btn btn-danger btn-block btn-md">Eliminar </button>
-        </form>
-      </div>
+              <div class="col-lg-3 col-lg-offset-8">
+                {!!Form::open(['route'=>'buscarProv','method'=>'POST','role' => 'search'])!!}
+               <div class="input-group" >
+                {!!Form::text('nombre',null,['id'=>'nombre', 'class'=>'form-control','placeholder'=>'Buscar cliente por nombre','required'])!!}
+                <div class="input-group-btn">
+                  <button id="buscar" class="btn btn-info" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar</button>
+                </div>
+              </div>
+              {!!Form::close()!!}
+            </div>
+          </div>
+          <br>
+</div>
+<div class="container-fluid tabla">
+  <div class="row">
+    <div class="col-lg-10 col-lg-offset-1 ">
+      <table class="table">
+        <thead id="botonAzul">
+          <th>Nombre</th>
+          <th>Monto acreditado</th>
+          <th>País</th>
+          <th>Fecha inicio</th>
+          <th></th>
+          <th></th>
+        </thead>
+        @foreach($proveedores as $prov)
+        <tbody class="well">
+          <td>{{$prov->nombre}}</td>
+          <td>{{$prov->montoac}}</td>
+          <td>{{$prov->nombre_lugar}}</td>
+          <td>{{$prov->fechainic}}</td>
+          <td>{!!link_to_route('proveedores.edit','Editar ',$parameters=$prov->id_proveedor,$attributes=['class'=>'btn btn-success'])!!}
+          </td>
+          <td>{!!Form::open(['route'=>['proveedores.destroy',$prov->id_proveedor],'method'=>'DELETE'])!!}
+            {!!Form::submit('Eliminar',['class'=>'btn btn-danger' ])!!}
+            {!!Form::close()!!}   </td>
+        </tbody>
+        @endforeach
+      </table>
     </div>
-  </th>
-</tbody>
-@endforeach
-</table>
+  </div>
 </div>
-</div>
-</div>
-    <script>
+
+
+
+
+
+
+
+            <script>
                   var add = 1;
                   function dynamic_phones() {
                   add++;
@@ -210,7 +218,6 @@
                               ' </div> <div class="col-xs-4"> <button type="button" class="btn btn-danger" onclick="remove_dynamic_phones('+ add +');" > <i class="fa fa-minus"></i> </button></span> </div></div> </div>';
                   objTo.appendChild(divtest)
               }
-
                 function remove_dynamic_phones(rid) {
                 $('.removeclass'+rid).remove();
               }
@@ -228,12 +235,13 @@
                   divtest.innerHTML = '<div class="form-group "> <label for="formGroup">Correo electronico</label> <div class="input-group">  <input class="form-control"  name="mail[]" type="text" placeholder="Ingrese su correo *"> <span class="input-group-btn"> <button type="button" class="btn btn-danger" onclick="remove_dynamic_mail('+ add +');" > <i class="fa fa-minus"></i> </button>  </span> </div></div>';
                   objTo.appendChild(divtest)
               }
-
                 function remove_dynamic_mail(rid) {
                 $('.removeclass'+rid).remove();
               }
             </script>
-           <script>
+
+
+             <script>
                   var add = 1;
                   function dynamic_web() {
                   add++;
@@ -244,21 +252,11 @@
                   divtest.innerHTML = '<div class="form-group "> <label for="formGroup">Pagina web</label> <div class="input-group">  <input class="form-control" name="web[]" type="text" placeholder="Ingrese su pagina web *"> <span class="input-group-btn"> <button type="button" class="btn btn-danger" onclick="remove_dynamic_web('+ add +');" > <i class="fa fa-minus"></i> </button>  </span> </div></div>';
                   objTo.appendChild(divtest)
               }
-
                 function remove_dynamic_web(rid) {
                 $('.removeclass'+rid).remove();
               }
             </script>
 
-            <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
-            <script type="text/javascript">
-            $(document).ready(function() {
-                $('#busqueda').click(function(){
-                    $("#tabla").load('/buscarProv');
-                });
-                ...
-            });
-            </script>
 
         </div>
 
