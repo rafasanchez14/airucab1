@@ -4,8 +4,18 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Models\Lugar;
 use DB;
+use Session;
 class PersonalController extends Controller
 {
+
+  public function index()
+  {
+      $lugares=DB::select("SELECT nombre_lugar,id_lugar FROM lugar WHERE tipo_lugar='pa' order by nombre_lugar;");
+       $beneficiarios=DB::select("SELECT beneficiario.id_bene,beneficiario.nombre_bene,beneficiario.apelldido_bene,personal.id_personal||' '||personal.nombre_personal||' '||personal.apellido_personal as perso , l1.nombre_lugar as parroquia,l2.nombre_lugar as municipio,l3.nombre_lugar as estado,l4.nombre_lugar as pais from beneficiario,personal,lugar l1,lugar l2,lugar l3,lugar l4 where beneficiario.id_lugar=l1.id_lugar and (l1.lugar_per=l2.id_lugar) and (l2.lugar_per=l3.id_Lugar) and (l3.lugar_per=l4.id_Lugar) and (beneficiario.cod_personal= personal.id_personal);");
+       $personal=DB::select("SELECT id_personal, id_personal||' '||nombre_personal||' '||apellido_personal as perso from personal;");
+      return view('portal/airucab-clientes',compact('lugares','clientes','personal','beneficiarios'));
+
+  }
 public function insertar_pers(Request $request){
   $cedula=$request->cedula;
   $nombre=$request->nombre;
@@ -145,4 +155,61 @@ public function insertar_bene(Request $request)
      $lugares=DB::select("SELECT nombre_lugar,id_lugar FROM lugar WHERE tipo_lugar='pa' order by nombre_lugar;");
    return view('portal/airucab-beneficiario',compact('lugares','sedes','personal'));
   }
+
+
+  public function edit($id)
+  {
+      $id_bene=$id;
+      $lugares=DB::select("SELECT * from Lugar order by nombre_lugar;");
+      $beneficiarios=DB::select("SELECT beneficiario.id_bene,beneficiario.nombre_bene,beneficiario.apelldido_bene,personal.id_personal||' '||personal.nombre_personal||' '||personal.apellido_personal as perso , l1.nombre_lugar as parroquia,l2.nombre_lugar as municipio,l3.nombre_lugar as estado,l4.nombre_lugar as pais from beneficiario,personal,lugar l1,lugar l2,lugar l3,lugar l4 where beneficiario.id_lugar=l1.id_lugar and (l1.lugar_per=l2.id_lugar) and (l2.lugar_per=l3.id_Lugar) and (l3.lugar_per=l4.id_Lugar) and (beneficiario.cod_personal= personal.id_personal);");
+       $bene=DB::selectOne("SELECT beneficiario.id_bene,beneficiario.nombre_bene,beneficiario.apelldido_bene,personal.id_personal||' '||personal.nombre_personal||' '||personal.apellido_personal as perso , l1.nombre_lugar as parroquia,l2.nombre_lugar as municipio,l3.nombre_lugar as estado,l4.nombre_lugar as pais from beneficiario,personal,lugar l1,lugar l2,lugar l3,lugar l4 where beneficiario.id_lugar=l1.id_lugar and (l1.lugar_per=l2.id_lugar) and (l2.lugar_per=l3.id_Lugar) and (l3.lugar_per=l4.id_Lugar) and (beneficiario.cod_personal= personal.id_personal)and (beneficiario.id_bene=$id_bene);");
+       $telefono=DB::select("SELECT cod_telf,cod_area,numerotelf from telefono where id_bene=$id_bene");
+
+  return view('portal/airucab-beneficiariosEdit',compact('lugares','beneficiarios','bene','telefono'));
+  }
+
+  public function update(Request $request, $id)
+  {
+    DB::Update('UPDATE beneficiario
+ SET  nombre_bene=?, apelldido_bene=?, id_lugar=?
+WHERE id_bene=?',array($request->nombre_bene,$request->apelldido_bene,$request->id_lugar,$id));
+Session::flash('save','Beneficiario modificado correctamente');
+return redirect('/beneficiarios');
+  }
+
+  public function destroy($id)
+  {
+
+  try {
+
+      $data1=array($id);
+      DB::delete("DELETE  FROM telefono WHERE id_bene = ?",$data1);
+    DB::delete("DELETE   FROM beneficiario WHERE id_bene = ?",$data1);
+    Session::flash('save','Beneficiario eliminado correctamente');
+    return redirect('/beneficiarios');
+
+      }catch (\Illuminate\Database\QueryException $e){
+          Session::flash('delete','No es posible eliminar este beneficiario');
+    return redirect('/beneficiarios');
+      }
+
+  }
+
+  public function buscarB(Request $request)
+  {
+
+      $nombre=$request->nombre;
+
+       $lugares=DB::select("SELECT nombre_lugar,id_lugar FROM lugar WHERE tipo_lugar='pa' order by nombre_lugar;");
+
+       $beneficiarios=DB::select("SELECT beneficiario.id_bene,beneficiario.nombre_bene,beneficiario.apelldido_bene,personal.id_personal||' '||personal.nombre_personal||' '||personal.apellido_personal as perso , l1.nombre_lugar as parroquia,l2.nombre_lugar as municipio,l3.nombre_lugar as estado,l4.nombre_lugar as pais from beneficiario,personal,lugar l1,lugar l2,lugar l3,lugar l4 where beneficiario.id_lugar=l1.id_lugar and (l1.lugar_per=l2.id_lugar) and (l2.lugar_per=l3.id_Lugar) and (l3.lugar_per=l4.id_Lugar) and (beneficiario.cod_personal= personal.id_personal) and (beneficiario.nombre_bene LIKE '$nombre%');");
+ $personal=DB::select("SELECT id_personal, id_personal||' '||nombre_personal||' '||apellido_personal as perso from personal;");
+     if(count($beneficiarios) > 0)
+      return view('portal/airucab-beneficiario',compact('lugares','beneficiarios','personal'));
+      else{
+            Session::flash('delete','No se encontraron resultados');
+    return redirect('/beneficiarios');
+      }
+  }
+
 }
