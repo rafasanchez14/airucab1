@@ -3,6 +3,7 @@
 @section('title','Registro')
 
 @section('content')
+ @include('layouts.messages')
 
 <div class="container-fluid">
   <div class="row">
@@ -100,6 +101,59 @@
     </form>
       </div>
 </div>
+</div>
+<div class="container-fluid">
+<div class="row">
+
+              <div class="col-lg-3 col-lg-offset-8">
+                {!!Form::open(['route'=>'buscarBene','method'=>'POST','role' => 'search'])!!}
+               <div class="input-group" >
+                {!!Form::text('nombre',null,['id'=>'nombre', 'class'=>'form-control','placeholder'=>'Buscar cliente por nombre','required'])!!}
+                <div class="input-group-btn">
+                  <button id="buscar" class="btn btn-info" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar</button>
+                </div>
+              </div>
+              {!!Form::close()!!}
+            </div>
+          </div>
+          <br>
+</div>
+<div class="container-fluid tabla">
+  <div class="row">
+    <div class="col-lg-10 col-lg-offset-1 ">
+      <table class="table">
+        <thead id="botonAzul">
+          <th>Cedula</th>
+            <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Beneficiado</th>
+          <th>País</th>
+          <th>Estado</th>
+          <th>Municipio</th>
+          <th>Parroquia</th>
+          <th></th>
+          <th></th>
+        </thead>
+        @foreach($beneficiarios as $bene)
+        <tbody class="well">
+          <td>{{$bene->id_bene}}</td>
+          <td>{{$bene->nombre_bene}}</td>
+          <td>{{$bene->apelldido_bene}}</td>
+          <td>{{$bene->perso}}</td>
+          <td>{{$bene->pais}}</td>
+          <td>{{$bene->estado}}</td>
+          <td>{{$bene->municipio}}</td>
+          <td>{{$bene->parroquia}}</td>
+          <td>{!!link_to_route('beneficiarios.edit','Editar ',$parameters=$bene->id_bene,$attributes=['class'=>'btn btn-success'])!!}
+          </td>
+          <td>{!!Form::open(['route'=>['beneficiarios.destroy',$bene->id_bene],'method'=>'DELETE'])!!}
+            {!!Form::submit('Eliminar',['class'=>'btn btn-danger' ])!!}
+            {!!Form::close()!!}   </td>
+        </tbody>
+        @endforeach
+      </table>
+    </div>
+  </div>
 </div>
 
 <script>
