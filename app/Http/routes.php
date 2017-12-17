@@ -24,9 +24,11 @@ Route::post('buscarClientes',
                 ['as' => 'buscarCliente', 'uses' => 'ClienteController@buscarC']);
 Route::post('buscarProveedores',
         ['as' => 'buscarProv', 'uses' => 'ProveedorController@buscarP']);
-        
+  Route::post('buscarBeneficiarios',
+                ['as' => 'buscarBene', 'uses' => 'PersonalController@buscarB']);
 route::resource('clientes','ClienteController');
 route::resource('proveedores','ProveedorController');
+route::resource('beneficiarios','PersonalController');
 route::resource('lugares','LugarController');
 Route::post('/inserta-bene','PersonalController@insertar_bene' );
 Route::get('/buscarEstado/{id}/pertenece','VistaController@buscarEstados');
