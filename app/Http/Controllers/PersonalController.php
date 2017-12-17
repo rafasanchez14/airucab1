@@ -1,17 +1,11 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Models\Lugar;
 use DB;
-
 class PersonalController extends Controller
 {
-
-
 public function insertar_pers(Request $request){
   $cedula=$request->cedula;
   $nombre=$request->nombre;
@@ -38,11 +32,8 @@ public function insertar_pers(Request $request){
       $fechaingr=date("d/m/Y", strtotime($fechac));
       $fecha_final=date("d/m/Y", strtotime($fechai));
       /*experiencia*/
-
   /*Beneficiario*/
-
 /*beneficiario*/
-
   $mail=$mail[0];
   $telefono=$telefono[0];
   $codarea=$codarea[0];
@@ -54,7 +45,6 @@ public function insertar_pers(Request $request){
             id_lugar, cod_sede)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
     [$cedula,$nombre,$apellido,$nombre2,$apellido2,$titulacion,$fechai,$fechac,$experiencia,$parroquia,$sede]);
-
 /*Inserto telefonos*/
     $i=0;
     $x=count($telefono);
@@ -69,38 +59,31 @@ public function insertar_pers(Request $request){
           }
           $ct=intval($ct);
           $ct=$ct+1;
-
     DB::insert('INSERT INTO telefono
     (cod_telf,cod_area, numerotelf, cod_personal)
     VALUES (?,?, ?, ?)', [$ct,$codarea[$i],$telefono[$i],$cedula]);
     $i=$i+1;
   }
     }
-
     $x=count($mail);
       $i=0;
       if ($mail[0]!='') {
     while ($i<$x)
     {
-
       $codc=DB::select("SELECT id_correo from correo
             order by id_correo desc limit 1");
-
             foreach ($codc as $key)
             {
               $cc=$key->id_correo;
             }
             $cc=intval($cc);
             $cc=$cc+1;
-
       DB::insert('INSERT INTO correo
       (id_correo,mail,cod_personal)
       VALUES (?,?, ?)', [$cc,$mail[$i],$cedula]);
       $i=$i+1;
     }
-
   }
-
   $i=0;
   if ($reds[0]!='') {
 while ($i<$x)
@@ -113,7 +96,6 @@ while ($i<$x)
         }
         $ct=intval($ct);
         $ct=$ct+1;
-
   DB::insert('INSERT INTO red_social
   (id_redsocial,plataforma, usuario, cod_personal)
   VALUES (?,?, ?, ?)', [$ct,$plataforma[$i],$reds[$i],$cedula]);
@@ -124,9 +106,7 @@ while ($i<$x)
    $lugares=DB::select("SELECT nombre_lugar,id_lugar FROM lugar WHERE tipo_lugar='pa' order by nombre_lugar;");
    $lugaresb=DB::select("SELECT nombre_lugar,id_lugar FROM lugar WHERE tipo_lugar='pa' order by nombre_lugar;");
  return view('portal/airucab-registro',compact('lugares','sedes','lugaresb'));
-
 }
-
 public function insertar_bene(Request $request)
 {
   $cedula=$request->cedula;
@@ -154,21 +134,15 @@ public function insertar_bene(Request $request)
             }
             $ct=intval($ct);
             $ct=$ct+1;
-
             DB::insert('INSERT INTO telefono
             (cod_telf,cod_area, numerotelf, id_bene)
             VALUES (?,?, ?, ?)', [$ct,$codarea[$i],$telefono[$i],$cedula]);
             $i=$i+1;
         }
     }
-
     $personal=DB::select("SELECT id_personal, id_personal||' '||nombre_personal||' '||apellido_personal as perso from personal;");
     $sedes=DB::select("SELECT nombre_sede,cod_sede FROM sede  order by nombre_sede;");
      $lugares=DB::select("SELECT nombre_lugar,id_lugar FROM lugar WHERE tipo_lugar='pa' order by nombre_lugar;");
    return view('portal/airucab-beneficiario',compact('lugares','sedes','personal'));
   }
-
-
-
-
 }

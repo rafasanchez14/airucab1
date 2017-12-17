@@ -9,7 +9,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {!!Html::style('css/bootstrap.css')!!}
     {!!Html::style('estilos.css')!!}
-    <link rel="stylesheet" type="text/css" href="font-awesome-4.7.0/css/font-awesome.css">
+     {!!Html::style('font-awesome-4.7.0/css/font-awesome.css')!!}
+
 </head>
 <body>
 <nav class="navbar navbar-default  navbar-static-top navbar-inverse arreglo" role="navigation" id="menu">
@@ -30,13 +31,13 @@
     <ul class="nav navbar-nav navbar-right  " >
       <li id="fondobarra"><a href="/" id="texto">INICIO</a></li>
 
-          <li id="fondobarra"><a href="/registro" id="texto">REGISTRO</a></li>
-          <li id="fondobarra"><a href="/materiaPrima" id="texto">MATERIA PRIMA</a></li>
-          <li id="fondobarra"><a href="/pruebas" id="texto">PRUEBAS</a></li>
-          <li id="fondobarra"><a href="/sedes" id="texto">SEDES</a></li>
-          <li id="fondobarra"><a href="/diseñoAvion" id="texto">DISEÑO DE AVIÓN</a></li>
-            <li id="fondobarra"><a href="" id="texto">PIEZA</a></li>
-            <li id="fondobarra"><a href="" id="texto">DISTRIBUCIÓN</a></li>
+      <li id="fondobarra"><a href="/registro" id="texto">REGISTRO</a></li>
+       <li id="fondobarra"><a href="/materiaPrima" id="texto">MATERIALES</a></li>
+       <li id="fondobarra"><a href="/pruebas" id="texto">PRUEBAS</a></li>
+       <li id="fondobarra"><a href="/sedes" id="texto">SEDES</a></li>
+       <li id="fondobarra"><a href="/diseñoAvion" id="texto">DISEÑO DE AVIÓN</a></li>
+         <li id="fondobarra"><a href="" id="texto">PIEZA</a></li>
+         <li id="fondobarra"><a href="" id="texto">DISTRIBUCIÓN</a></li>
       </ul>
 
     </div>
@@ -94,7 +95,10 @@
 @yield('script')
 
 
-
+  <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-datepicker3.css')}}">
+  <link rel="stylesheet" href="{{asset('datePicker/css/bootstrap-standalone.css')}}">
+  <script src="{{asset('datePicker/js/bootstrap-datepicker.js')}}"></script>
+  <script src="{{asset('datePicker/locales/bootstrap-datepicker.es.min.js')}}"></script>
 <script>
 
 $(function (){
@@ -181,16 +185,7 @@ function  m1() {
          $("#m6").hide(500);
 
   }
-  function  m1() {
 
-       $("#m1").show(500);
-        $("#m2").hide(500);
-         $("#m3").hide(500);
-          $("#m4").hide(500);
-          $("#m5").hide(500);
-           $("#m6").hide(500);
-
-    }
     function  m2() {
 
          $("#m2").show(500);
@@ -258,6 +253,16 @@ function  experiencia() {
      $("#beneficiario").show(500);
   }
 
+
+
+              $('.datepicker').datepicker({
+      format: "yyyy/mm/dd",
+      maxViewMode: 0,
+      todayBtn: "linked",
+      language: "es",
+      todayHighlight: true,
+      autoclose:true,
+    });
 
 </script>
 

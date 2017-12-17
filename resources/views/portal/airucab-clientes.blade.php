@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title','Registro')
 @section('content')
-@include('layouts.messages') 
+@include('layouts.messages')
 
 <div class="container-fluid">
   <div class="row">
@@ -14,12 +14,13 @@
 <div class="container " id="margenSubmenu">
           <ul class="nav nav-tabs nav-justified ">
             <li ><a id="Amarillo" href="/registro" >Personal</a></li>
+              <li class="" ><a id="Verde" href="/beneficiarios" >Beneficiario</a></li>
             <li class="active" ><a id="Azul" href="/clientes" > Clientes</a></li>
             <li id="margenPregunta"><a id="Verde" href=/proveedores>Proveedores</a></li>
           </ul>
 </div>
           <div class="tab-content " >
-            
+
 
             <div class="tab-pane fade in active" id="clientes">
 
@@ -43,12 +44,12 @@
          <label for="formGroup">pais</label>
          <select  id="pais" class="form-control" required>
             <option value="">Seleccione el pais donde reside</option>
-            @foreach($lugares as $lugar) 
+            @foreach($lugares as $lugar)
             <option value="{{$lugar->id_lugar}}">{{$lugar->nombre_lugar}}</option>
           @endforeach
         </select>
       </div>
-     
+
       <div class="form-group">
          <label for="formGroup">estado</label>
          <select  id="estado" class="form-control" required>
@@ -67,12 +68,12 @@
             <option value="">Seleccione la parroquia donde reside</option>
         </select>
       </div>
-     
+
        <div class="form-group">
          <label for="formGroup">DNI</label>
           <input class="form-control" name="dni" type="text" placeholder="Ingrese el apellido*" required>
       </div>
-      
+
 
   </div>
 
@@ -105,7 +106,7 @@
                                 <div class="col-xs-4">
 
                     <button type="button" class="btn btn-default addButton" onclick="dynamic_phones();" > <i class="fa fa-plus"></i> </button>
-                    
+
                     </div>
             </div>
           </div>
@@ -135,8 +136,8 @@
                  <label for="formGroup">Fecha de incio</label>
                <input type="text" class="form-control datepicker" name="fechaini" placeholder="Ingrese fecha de inicio*" value="{{ old('fechaini') }}" required>
             </div>
-             
-            
+
+
 
 
 </div>
@@ -154,11 +155,11 @@
 </div>
 
 
-{!!Form::close()!!} 
+{!!Form::close()!!}
             </div>
             </div>
 
-      
+
 
         </div>
 <div class="container-fluid">
@@ -171,23 +172,23 @@
 </div>
 <div class="container-fluid">
 <div class="row">
-            
+
               <div class="col-lg-3 col-lg-offset-8">
                 {!!Form::open(['route'=>'buscarCliente','method'=>'POST','role' => 'search'])!!}
                <div class="input-group" >
                 {!!Form::text('nombre',null,['id'=>'nombre', 'class'=>'form-control','placeholder'=>'Buscar cliente por nombre','required'])!!}
                 <div class="input-group-btn">
-                  <button id="buscar" class="btn btn-info" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar</button>    
+                  <button id="buscar" class="btn btn-info" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar</button>
                 </div>
               </div>
               {!!Form::close()!!}
             </div>
           </div>
-          <br>  
+          <br>
 </div>
 <div class="container-fluid tabla">
   <div class="row">
-    <div class="col-lg-10 col-lg-offset-1 ">        
+    <div class="col-lg-10 col-lg-offset-1 ">
       <table class="table">
         <thead id="botonAzul">
           <th>Nombre</th>
@@ -210,9 +211,9 @@
           <td>{{$cliente->dni}}</td>
           <td>{{$cliente->montoac}}</td>
           <td>{{$cliente->pais}}</td>
-          <td>{{$cliente->estado}}</td> 
+          <td>{{$cliente->estado}}</td>
           <td>{{$cliente->municipio}}</td>
-          <td>{{$cliente->parroquia}}</td>           
+          <td>{{$cliente->parroquia}}</td>
           <td>{!!link_to_route('clientes.edit','Editar ',$parameters=$cliente->id_cliente,$attributes=['class'=>'btn btn-success'])!!}
           </td>
           <td>{!!Form::open(['route'=>['clientes.destroy',$cliente->id_cliente],'method'=>'DELETE'])!!}
