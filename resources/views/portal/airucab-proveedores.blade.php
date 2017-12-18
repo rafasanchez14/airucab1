@@ -15,6 +15,7 @@
 <div class="container " id="margenSubmenu">
           <ul class="nav nav-tabs nav-justified ">
             <li ><a id="Amarillo" href="/registro"  >Personal</a></li>
+            <li ><a id="Verde" href="/beneficiarios" >Beneficiario</a></li>
             <li ><a id="Azul" href="/clientes" > Clientes</a></li>
             <li class="active" id="margenPregunta"><a id="Verde" href=/proveedores>Proveedores</a></li>
           </ul>

@@ -1,8 +1,9 @@
 @extends('layouts.master')
 
 @section('title','Registro')
- @include('layouts.messages')
+
 @section('content')
+ @include('layouts.messages')
 <div class="container-fluid">
   <div class="row">
      <div class="col-lg-4 col-lg-offset-1 ">
@@ -13,67 +14,108 @@
 </div>
 <div class="container " id="margenSubmenu">
           <ul class="nav nav-tabs nav-justified ">
-            <li class="active" ><a id="Amarillo" href="/registro" >Personal</a></li>
+            <li class="active" ><a id="Amarillo" href="/personal" >Personal</a></li>
             <li ><a id="Azul" href="/clientes" > Clientes</a></li>
-            <li ><a id="Verde" href="/beneficiarios" >Beneficiario</a></li>
             <li id="margenPregunta"><a id="Verde" href=/proveedores>Proveedores</a></li>
           </ul>
 </div>
           <div class="tab-content " >
             <div class="tab-pane fade in active" id="home">
-
     <div class="container-fluid " id="margenSubmenu">
+  {!!Form::model($per,['route'=>['registro.update',$per->id_personal],'method'=>'PUT'])!!}
   <div class="row ">
     <div class="col-lg-4 col-lg-offset-2 col-xs-12 " id="home">
-
-      <form class="" action="/inserta-personal" method="post">
+      <div class="form-group">
         <div class="form-group">
-         <label for="formGroup">Cedula</label>
-          <input class="form-control"  name="cedula"type="text" placeholder="Ingrese la cédula*">
+           {!!Form::label('nombre')!!}
+            {!!Form::text('nombre_personal',null,['class'=>'form-control','placeholder'=>'Ingrese el nombre*','required'])!!}
+        </div>
       </div>
       <div class="form-group">
-         <label for="formGroup">Nombre</label>
-          <input class="form-control"  name="nombre" type="text" placeholder="Ingrese el nombre*">
+        <div class="form-group">
+           {!!Form::label('nombre2')!!}
+            {!!Form::text('nombre2_personal',null,['class'=>'form-control','placeholder'=>'Ingrese el nombre*','required'])!!}
+        </div>
       </div>
       <div class="form-group">
-         <label for="formGroup">Nombre2</label>
-          <input class="form-control" name="nombre2" type="text" placeholder="Ingrese el nombre (opcional)">
+        {!!Form::label('Apellido')!!}
+         {!!Form::text('apellido_personal',null,['class'=>'form-control','placeholder'=>'Ingrese el nombre*','required'])!!}
       </div>
       <div class="form-group">
-         <label for="formGroup">Apellido</label>
-          <input class="form-control" name="apellido" type="text" placeholder="Ingrese el apellido*">
+        {!!Form::label('Apellido')!!}
+         {!!Form::text('apellido2_personal',null,['class'=>'form-control','placeholder'=>'Ingrese el nombre*','required'])!!}
       </div>
       <div class="form-group">
-         <label for="formGroup">Apellido2</label>
-          <input class="form-control"  name="apellido2" type="text" placeholder="Ingrese el apellido(opcional)">
-      </div>
-      <div class="form-group">
-         <label for="formGroup">pais</label>
-         <select name= "pais" id="pais" class="form-control" required>
-            <option value="">Seleccione el pais donde reside</option>
-            @foreach($lugares as $lugar)
-            <option value="{{$lugar->id_lugar}}">{{$lugar->nombre_lugar}}</option>
-          @endforeach
-        </select>
+        {!! Form::label('País') !!}
+        <select class="form-control"
+        id="pais" required>
+
+ @foreach($lugares as $lugar)
+ @if(($lugar->tipo_lugar)=='pa')
+ @if(($lugar->nombre_lugar)==$per->pais)
+        <option value="{{$lugar->id_lugar}}">{{$per->pais}}</option>
+        @endif
+        @endif
+@endforeach
+
+         @foreach($lugares as $lugar)
+         @if(($lugar->tipo_lugar)=='pa')
+         @if(($lugar->nombre_lugar)!=$per->pais)
+         <option value="{{$lugar->id_lugar}}">{{$lugar->nombre_lugar}}</option>
+         @endif
+         @endif
+         @endforeach
+         </select>
       </div>
 
       <div class="form-group">
-         <label for="formGroup">estado</label>
-         <select name= "estado" id="estado" class="form-control" required>
-            <option value="">Seleccione el estado donde reside</option>
-        </select>
+        {!! Form::label('Estado') !!}
+         <select  class="form-control" id="estado" required>
+
+         @foreach($lugares as $lugar)
+     @if(($lugar->tipo_lugar)=='es')
+     @if(($lugar->nombre_lugar)==$per->estado)
+        <option value="{{$lugar->id_lugar}}">{{$per->estado}}</option>
+        @endif
+        @endif
+     @endforeach
+             @foreach($lugares as $lugar)
+               @if(($lugar->tipo_lugar)=='es')
+                 @if(($lugar->nombre_lugar)!=$per->estado)
+                   <option value="{{$lugar->id_lugar}}">{{$lugar->nombre_lugar}}</option>
+                 @endif
+               @endif
+             @endforeach
+       </select>
       </div>
-       <div class="form-group">
-         <label for="formGroup">Municipio</label>
-         <select name= "municipio" id="municipio" class="form-control" required>
-            <option value="">Seleccione el municipio donde reside</option>
-        </select>
-      </div>
+
       <div class="form-group">
-         <label for="formGroup">Parroquia</label>
-         <select name= "parroquia" id="parroquia" class="form-control" required>
-            <option value="">Seleccione la parroquia donde reside</option>
-        </select>
+                    {!! Form::label('Municipio') !!}
+                     <select  class="form-control" id="municipio" required>
+
+                     @foreach($lugares as $lugar)
+            @if(($lugar->tipo_lugar)=='mun')
+            @if(($lugar->nombre_lugar)==$per->municipio)
+                    <option value="{{$lugar->id_lugar}}">{{$per->municipio}}</option>
+                    @endif
+                    @endif
+           @endforeach
+
+                   </select>
+         </div>
+      <div class="form-group">
+        {!! Form::label('Parroquia') !!}
+         <select name= "id_lugar" class="form-control" id="parroquia" required>
+
+         @foreach($lugares as $lugar)
+@if(($lugar->tipo_lugar)=='par')
+@if(($lugar->nombre_lugar)==$per->parroquia)
+        <option value="{{$lugar->id_lugar}}">{{$per->parroquia}}</option>
+        @endif
+        @endif
+@endforeach
+
+       </select>
       </div>
 
 
@@ -155,16 +197,15 @@
        </div>
           </div>
 
-
           <div class="form-group" id="mail">
-                            <label for="formGroup">Correo electronico</label>
-                              <div class="input-group">
-                                <input class="form-control" id="mail" name="mail[]" type="text" placeholder="Ingrese su correo*">
-                              <span class="input-group-btn">
-                                 <button type="button" class="btn btn-default addButton" onclick="dynamic_mail();" > <i class="fa fa-plus"></i> </button>
-                              </span>
-                            </div>
-            </div>
+                <label for="formGroup">Correo electronico</label>
+                  <div class="input-group">
+                    <input class="form-control" id="mail" name="mail[]" type="text" placeholder="Ingrese su correo*">
+                  <span class="input-group-btn">
+                     <button type="button" class="btn btn-default addButton" onclick="dynamic_mail();" > <i class="fa fa-plus"></i> </button>
+                  </span>
+                </div>
+          </div>
 
 </div>
 </div>
@@ -209,64 +250,67 @@
     <div class="col-xs-12 col-lg-offset-4 col-lg-4" id="fondo">
       <div id="margenSubmenu">
         <center><button id="botonAmarillo" type="submit" class="btn btn-default btn-block btn-lg"><span  class="fa fa-upload" aria-hidden="true"></span>  Agregar Personal</button></center>
-      </form>
+
       </div>
+      {!!Form::close()!!}
     </div>
 </div>
 
 </div>
+  <div class="container-fluid tabla">
+    <div class="row">
+      <div class="col-lg-10 col-lg-offset-1 ">
+        <table class="table">
+          <thead id="botonAzul">
+            <th>Cedula</th>
+            <th>Nombre</th>
+            <th>Nombre2</th>
+            <th>Apellido</th>
+            <th>Apellido2</th>
+            <th>Fecha ini</th>
+            <th>Fecha fin</th>
+            <th>Experiencia</th>
+            <th>Titulación</th>
+            <th>Sede</th>
+            <th>País</th>
+            <th>Estado</th>
+            <th>Municipio</th>
+            <th>Parroquia</th>
+            <th></th>
+            <th></th>
+          </thead>
+          @foreach($personal as $per)
+          <tbody class="well">
+            <td>{{$per->id_personal}}</td>
+            <td>{{$per->nombre_personal}}</td>
+            <td>{{$per->nombre2_personal}}</td>
+            <td>{{$per->apellido_personal}}</td>
+            <td>{{$per->apellido2_personal}}</td>
+            <td>{{$per->fechainicio}}</td>
+            <td>{{$per->fechafin}}</td>
+            <td>{{$per->experiencia}}</td>
+            <td>{{$per->titulacion}}</td>
+            <td>{{$per->nombre_sede}}</td>
+            <td>{{$per->pais}}</td>
+            <td>{{$per->estado}}</td>
+            <td>{{$per->municipio}}</td>
+            <td>{{$per->parroquia}}</td>
+            <td>{!!link_to_route('registro.edit','Editar ',$parameters=$per->id_personal,$attributes=['class'=>'btn btn-success'])!!}
+            </td>
+            <td>{!!Form::open(['route'=>['registro.destroy',$per->id_personal],'method'=>'DELETE'])!!}
+              {!!Form::submit('Eliminar',['class'=>'btn btn-danger' ])!!}
+              {!!Form::close()!!}   </td>
+          </tbody>
+          @endforeach
+        </table>
+      </div>
+    </div>
+  </div>
 
-            </div>
 
-            <div class="container-fluid tabla">
-              <div class="row">
-                <div class="col-lg-10 col-lg-offset-1 ">
-                  <table class="table">
-                    <thead id="botonAzul">
-                      <th>Cedula</th>
-                      <th>Nombre</th>
-                      <th>Nombre2</th>
-                      <th>Apellido</th>
-                      <th>Apellido2</th>
-                      <th>Fecha ini</th>
-                      <th>Fecha fin</th>
-                      <th>Experiencia</th>
-                      <th>Titulación</th>
-                      <th>Sede</th>
-                      <th>País</th>
-                      <th>Estado</th>
-                      <th>Municipio</th>
-                      <th>Parroquia</th>
-                      <th></th>
-                      <th></th>
-                    </thead>
-                    @foreach($personal as $per)
-                    <tbody class="well">
-                      <td>{{$per->id_personal}}</td>
-                      <td>{{$per->nombre_personal}}</td>
-                      <td>{{$per->nombre2_personal}}</td>
-                      <td>{{$per->apellido_personal}}</td>
-                      <td>{{$per->apellido2_personal}}</td>
-                      <td>{{$per->fechainicio}}</td>
-                      <td>{{$per->fechafin}}</td>
-                      <td>{{$per->experiencia}}</td>
-                      <td>{{$per->titulacion}}</td>
-                      <td>{{$per->nombre_sede}}</td>
-                      <td>{{$per->pais}}</td>
-                      <td>{{$per->estado}}</td>
-                      <td>{{$per->municipio}}</td>
-                      <td>{{$per->parroquia}}</td>
-                      <td>{!!link_to_route('registro.edit','Editar ',$parameters=$per->id_personal,$attributes=['class'=>'btn btn-success'])!!}
-                      </td>
-                      <td>{!!Form::open(['route'=>['registro.destroy',$per->id_personal],'method'=>'DELETE'])!!}
-                        {!!Form::submit('Eliminar',['class'=>'btn btn-danger' ])!!}
-                        {!!Form::close()!!}   </td>
-                    </tbody>
-                    @endforeach
-                  </table>
-                </div>
-              </div>
-            </div>
+
+
+
             <script>
                   var add = 1;
                   function dynamic_phones() {
@@ -280,6 +324,7 @@
                               ' </div> <div class="col-xs-4"> <button type="button" class="btn btn-danger" onclick="remove_dynamic_phones('+ add +');" > <i class="fa fa-minus"></i> </button></span> </div></div> </div>';
                   objTo.appendChild(divtest)
               }
+
                 function remove_dynamic_phones(rid) {
                 $('.removeclass'+rid).remove();
               }
@@ -296,10 +341,12 @@
                  divtest.innerHTML = '<div class="form-group "> <label for="formGroup">Correo electronico</label> <div class="input-group">  <input class="form-control"  name="mail[]" type="text" placeholder="Ingrese su correo *"> <span class="input-group-btn"> <button type="button" class="btn btn-danger" onclick="remove_dynamic_mail('+ add +');" > <i class="fa fa-minus"></i> </button>  </span> </div></div>';
                  objTo.appendChild(divtest)
              }
+
                function remove_dynamic_mail(rid) {
                $('.removeclass'+rid).remove();
              }
            </script>
+
            <script>
                 var add = 1;
                 function dynamic_rs() {
@@ -319,6 +366,7 @@
                 '</div></div></div>'
                 objTo.appendChild(divtest)
             }
+
               function remove_dynamic_rs(rid) {
               $('.removeclass'+rid).remove();
             }
@@ -337,26 +385,12 @@
                             ' </div> <div class="col-xs-4"> <button type="button" class="btn btn-danger" onclick="remove_dynamic_phonesb('+ add +');" > <i class="fa fa-minus"></i> </button></span> </div></div> </div>';
                 objTo.appendChild(divtest)
             }
+
               function remove_dynamic_phonesb(rid) {
               $('.removeclass'+rid).remove();
             }
           </script>
-          <script>
-               var add = 1;
-               function dynamic_mail() {
-               add++;
-               var objTo = document.getElementById('mail')
-               var divtest = document.createElement("div");
-               divtest.setAttribute("class", "form-group removeclass"+add);
-               var rdiv = 'removeclass'+add;
-               divtest.innerHTML = '<div class="form-group "> <label for="formGroup">Correo electronico</label> <div class="input-group">  <input class="form-control"  name="mail[]" type="text" placeholder="Ingrese su correo *"> <span class="input-group-btn"> <button type="button" class="btn btn-danger" onclick="remove_dynamic_mail('+ add +');" > <i class="fa fa-minus"></i> </button>  </span> </div></div>';
-               objTo.appendChild(divtest)
-           }
 
-             function remove_dynamic_mail(rid) {
-             $('.removeclass'+rid).remove();
-           }
-         </script>
 
 
         </div>
