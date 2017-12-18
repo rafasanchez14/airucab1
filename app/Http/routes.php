@@ -25,12 +25,15 @@ Route::post('buscarClientes',
 Route::post('buscarProveedores',
         ['as' => 'buscarProv', 'uses' => 'ProveedorController@buscarP']);
   Route::post('buscarBeneficiarios',
-                ['as' => 'buscarBene', 'uses' => 'PersonalController@buscarB']);
+                ['as' => 'buscarBene', 'uses' => 'BeneController@buscarB']);
+   Route::post('buscarPersonal',
+                              ['as' => 'buscarPer', 'uses' => 'PersonalController@buscarP']);
 route::resource('clientes','ClienteController');
 route::resource('proveedores','ProveedorController');
-route::resource('beneficiarios','PersonalController');
+route::resource('beneficiarios','BeneController');
+route::resource('registro','PersonalController');
 route::resource('lugares','LugarController');
-Route::post('/inserta-bene','PersonalController@insertar_bene' );
+Route::post('/inserta-bene','BeneController@insertar_bene' );
 Route::get('/buscarEstado/{id}/pertenece','VistaController@buscarEstados');
 Route::get('/buscarMatpru','PruebasController@buscarMP');
 Route::get('/buscarMunicipio/{id}/pertenece','VistaController@buscarMunicipios');
