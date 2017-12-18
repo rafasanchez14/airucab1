@@ -17,10 +17,14 @@ class VistaController extends Controller
     }
     public function registro()
     {
+        $personal=DB::select(" SELECT personal.id_personal,personal.nombre_personal,personal.apellido_personal,personal.apellido2_personal,personal.nombre2_personal,
+  personal.fechainicio,personal.fechafin, personal.experiencia,personal.titulacion, sede.nombre_sede,
+  l1.nombre_lugar as parroquia,l2.nombre_lugar as municipio,l3.nombre_lugar as estado,l4.nombre_lugar as pais
+  from personal,sede,lugar l1,lugar l2,lugar l3,lugar l4 where personal.id_lugar=l1.id_lugar and (l1.lugar_per=l2.id_lugar) and
+  (l2.lugar_per=l3.id_Lugar) and (l3.lugar_per=l4.id_Lugar) and (personal.cod_sede= sede.cod_sede);");
        $sedes=DB::select("SELECT nombre_sede,cod_sede FROM sede  order by nombre_sede;");
         $lugares=DB::select("SELECT nombre_lugar,id_lugar FROM lugar WHERE tipo_lugar='pa' order by nombre_lugar;");
-        $lugaresb=DB::select("SELECT nombre_lugar,id_lugar FROM lugar WHERE tipo_lugar='pa' order by nombre_lugar;");
-    	return view('portal/airucab-registro',compact('lugares','sedes','lugaresb'));
+    	  return view('portal/airucab-registro',compact('lugares','sedes','personal'));
     }
 
     public function beneficiarios()
@@ -39,6 +43,12 @@ $beneficiarios=DB::select("SELECT beneficiario.id_bene,beneficiario.nombre_bene,
         return view('portal/airucab-clientes',compact('lugares'));
     }
 
+    public function pruebascrud()
+    {
+        $lugares=DB::select("SELECT nombre_lugar,id_lugar FROM lugar WHERE tipo_lugar='pa' order by nombre_lugar;");
+        return view('portal/airucab-pruebascrud');
+    }
+
     public function proveedores()
     {
         $proveedores=DB::select("SELECT p.id_proveedor,p.nombre, p.fechainic, p.montoac, l.nombre_lugar from proveedor p, lugar l
@@ -53,15 +63,15 @@ $beneficiarios=DB::select("SELECT beneficiario.id_bene,beneficiario.nombre_bene,
         $materiales=DB::select("SELECT nombre,cod_material FROM material  order by nombre;");
     	return view('portal/airucab-sedes',compact('sedes','materiales'));
     }
-    public function pruebas()
+    public function pruebasmat()
     {
-        $sedes=DB::select("SELECT nombre_sede,cod_sede FROM sede  order by nombre_sede;");
+        $zonas=DB::select("SELECT a.id_zona, a.nombre_zona||'|'||b.nombre_sede as nombre from zona a, sede b where a.cod_sede=b.cod_sede order by nombre_zona;");
         $materiales=DB::select("SELECT nombre,cod_material FROM material  order by nombre;");
         $pruebas=DB::select("SELECT nombre_prueb,cod_prueba FROM Prueba order by nombre_prueb;");
-        $pruebamat=DB::select("SELECT  p.cod_pruebamat,p.fechafin, m.nombre, pp.nombre_prueb , z.nombre_zona, s.nombre_sede
+        $pruebamat=DB::select("SELECT  p.cod_pruebamat,p.fechaini,p.fechafin, m.nombre, pp.nombre_prueb , z.nombre_zona, s.nombre_sede
           from material m, prueba pp, material_prueba p, zona z, sede s
           where pp.cod_prueba=p.cod_prueba and m.cod_material=p.cod_material and p.id_zona=z.id_zona and s.cod_sede=z.cod_sede");
-      return view('portal/airucab-pruebas',compact('sedes','materiales','pruebas','pruebamat'));
+      return view('portal/airucab-pruebas',compact('zonas','materiales','pruebas','pruebamat'));
     }
     public function materiaPrima()
     {
