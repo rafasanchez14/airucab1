@@ -1,8 +1,7 @@
 @extends('layouts.master')
-
-@section('title','Pruebas')
-
+@section('title','pruebas')
 @section('content')
+@include('layouts.messages')
 
 <div class="container-fluid">
   <div class="row">
@@ -15,13 +14,12 @@
 
 <div class="container margenMenu" id="margenSubmenu">
           <ul class="nav nav-tabs nav-justified ">
-            <li class="active" ><a id="Amarillo" href="#home" role="tab" data-toggle="tab">Agregar</a></li>
-            <li ><a id="Azul" href="#Lista" role="tab" data-toggle="tab"> Lista</a></li>
+            <li ><a id="Azul" href="/pruebascrud" role="tab" data-toggle="tab"> Prueba</a></li>
+            <li class="active" ><a id="Amarillo" href="prueba" role="tab" data-toggle="tab">Prueba Material</a></li>
           </ul>
 </div>
           <div class="tab-content " >
-            <div class="tab-pane fade in active" id="home">
-
+            <div class="tab-pane fade in active" id="prueba">
               <div class="container-fluid " id="margenSubmenu">
   <div class="row ">
     <div class="col-lg-4 col-lg-offset-4 " id="home">
@@ -36,13 +34,13 @@
         </select>
       </div>
       <div class="form-group">
-                 <label for="formGroup">Fecha de Inicio</label>
-                <input type="date" class="form-control" step="1" min="1940-01-01" max="2024-30-06" name="fecha_i" id="fecha_i" placeholder="Ingresa la fecha" >
-        </div>
-      <div class="form-group">
-                 <label for="formGroup">Fecha de culminación</label>
-                <input type="date" class="form-control" step="1" min="1940-01-01" max="2024-30-06" name="fecha_c" id="fecha_c" placeholder="Ingresa la fecha" >
-        </div>
+               <label for="formGroup">Fecha de incio</label>
+             <input type="text" class="form-control datepicker" name="fechai" placeholder="Ingrese fecha de inicio*" value="{{ old('fechaini') }}" required>
+          </div>
+          <div class="form-group">
+                   <label for="formGroup">Fecha de culminacion</label>
+                 <input type="text" class="form-control datepicker" name="fechac" placeholder="Ingrese fecha de culminacion*" value="{{ old('fechaini') }}" required>
+              </div>
       <div class="form-group">
         <label for="formGroup">Materiales </label>
           <select name= "material" id="material" class="form-control" required>
@@ -53,11 +51,11 @@
         </select>
       </div>
        <div class="form-group">
-        <label for="formGroup">Sede </label>
-          <select name= "sede" id="sede" class="form-control" required>
-            <option value="">Ingrese la sede</option>
-            @foreach($sedes as $sede)
-            <option value="{{$sede->cod_sede}}">{{$sede->nombre_sede}}</option>
+        <label for="formGroup">Zona </label>
+          <select name= "zona" id="zona" class="form-control" required>
+            <option value="">Ingrese la Zona</option>
+            @foreach($zonas as $zona)
+            <option value="{{$zona->id_zona}}">{{$zona->nombre}}</option>
           @endforeach
         </select>
       </div>
@@ -74,131 +72,44 @@
 </div>
 
 </div>
-
             </div>
 
-            <div class="tab-pane fade " id="Lista">
-            <div class="container" id="margenSubmenu" >
-
-<div class="row" >
-  <div class="col-lg-4 col-lg-offset-8 col-xs-10 col-xs-offset-1">
-<form class="" action="/buscarMatpru" method="GET">
-    <div class="input-group" >
-        <input type="text" class="form-control" name="clave"placeholder="Buscar por nombre" >
-          <span class="input-group-btn ">
-          <button  class="btn btn-info"  type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar </button>
-
-      </span>
-    </div>
-      </form>
-  </div>
-</div>
-             <div class="table-responsive" id="margenSubmenu">
-  <div id="height">
-  <table class="table table-fixed">
-    <thead id="textColor">
-
-        <th class="col-xs-1 center">CODIGO PRUEBA</th>
-        <th class="col-xs-3 center">NOMBRE</th>
-        <th class="col-xs-2 center">MATERIALES</th>
-        <th class="col-xs-3 center">CULMINACIÓN</th>
-        <th class="col-xs-3 center">SEDE</th>
-    </thead>
-
-  @foreach($pruebamat as $pm)
-    <tbody id="margenPregunta">
-
-      <td class="col-xs-1">{{$pm->cod_pruebamat}}</td>
-      <td class="col-xs-3 center">{{$pm->nombre_prueb}}</td>
-      <td class="col-xs-2 center">{{$pm->nombre}} </td>
-      <td class="col-xs-3 center">{{$pm->fechafin}}</td>
-      <td class="col-xs-3 center">{{$pm->nombre_sede}}</td>
-    </tbody>
-            @endforeach
-  </table>
-  </div>
-</div>
-
-
-
-
-
-            </div>
-            </div>
-
-            <div class="tab-pane fade" id="Proveedores">
-              <div class="container-fluid" id="margenSubmenu">
-                <div class="row">
-    <div class="col-lg-4 col-lg-offset-2 col-xs-12 ">
-
-
-      <div class="form-group">
-         <label for="formGroup">Nombre</label>
-          <input class="form-control"  type="text" placeholder="Ingrese el nombre*">
-      </div>
-
-      <div class="form-group">
-         <label for="formGroup">Dirección</label>
-          <input class="form-control"  type="text" placeholder="Ingrese el monto acreditado*">
-      </div>
-      <div class="form-group">
-         <label for="formGroup">Monto acreditado</label>
-          <input class="form-control"  type="text" placeholder="Ingrese el apellido*">
-      </div>
-      <div class="form-group">
-         <label for="formGroup">Telefono 1</label>
-          <input class="form-control"  type="text" placeholder="Ingrese el telefono 1*">
-      </div>
-
-  </div>
-
-  <div class="col-lg-4">
-
- <div class="form-group">
-         <label for="formGroup">Telefono 2</label>
-          <input class="form-control"  type="text" placeholder="Ingrese el telefono 2*">
-      </div>
-
-
-<div class="form-group">
-         <label for="formGroup">Correo electronico</label>
-          <input class="form-control"  type="text" placeholder="Ingrese su correo*">
-      </div>
-
-<div class="form-group">
-         <label for="formGroup">Pagina web</label>
-          <input class="form-control"  type="text" placeholder="Ingrese su pagina web*">
-      </div>
-
-        <div class="form-group">
-                 <label for="formGroup">Fecha de incio</label>
-                <input type="date" class="form-control" step="1" min="1940-01-01" max="2017-30-06" name="fecha_ini" id="fecha_ini" placeholder="Ingresa la fecha de inicio" >
+            <div class="container-fluid tabla">
+              <div class="row">
+                <div class="col-lg-10 col-lg-offset-1 ">
+                  <table class="table">
+                    <thead id="botonAzul">
+                      <th>Codigo</th>
+                      <th>Fecha inicio</th>
+                      <th>Fecha fin</th>
+                      <th>Material</th>
+                      <th>Prueba</th>
+                      <th>Zona</th>
+                      <th>Sede</th>
+                      <th></th>
+                      <th></th>
+                    </thead>
+                    @foreach($pruebamat as $prueba)
+                    <tbody class="well">
+                      <td>{{$prueba->cod_pruebamat}}</td>
+                      <td>{{$prueba->fechaini}}</td>
+                      <td>{{$prueba->fechafin}}</td>
+                      <td>{{$prueba->nombre}}</td>
+                      <td>{{$prueba->nombre_prueb}}</td>
+                      <td>{{$prueba->nombre_zona}}</td>
+                      <td>{{$prueba->nombre_sede}}</td>
+                      <td>{!!link_to_route('pruebamat.edit','Editar ',$parameters=$prueba->cod_pruebamat,$attributes=['class'=>'btn btn-success'])!!}
+                      </td>
+                      <td>{!!Form::open(['route'=>['pruebamat.destroy',$prueba->cod_pruebamat],'method'=>'DELETE'])!!}
+                        {!!Form::submit('Eliminar',['class'=>'btn btn-danger' ])!!}
+                        {!!Form::close()!!}   </td>
+                    </tbody>
+                    @endforeach
+                  </table>
+                </div>
+              </div>
             </div>
 
 
-</div>
-</div>
-
-
-
-<div class="row">
-    <div class="col-xs-12 col-lg-offset-4 col-lg-4" id="fondo">
-      <div id="margenbotonAgregar">
-        <center><button  id="botonVerde" type="submit" class="btn btn-default btn-block btn-lg"><span  class="fa fa-upload" aria-hidden="true"></span> Agregar Proveedor
-        </button></center>
-
-      </div>
-
-    </div>
-</div>
-
-
-
-            </div>
-            </div>
-
-
-
-        </div>
 
 @endsection
