@@ -12,12 +12,13 @@
 
 </div>
 
-<div class="container margenMenu" id="margenSubmenu">
+<div class="container " id="margenSubmenu">
           <ul class="nav nav-tabs nav-justified ">
-            <li ><a id="Azul" href="/pruebascrud" role="tab" data-toggle="tab"> Prueba</a></li>
-            <li class="active" ><a id="Amarillo" href="prueba" role="tab" data-toggle="tab">Prueba Material</a></li>
+            <li ><a id="Amarillo" href="/pruebascrud" >Pruebas</a></li>
+            <li class="active" ><a id="Verde" href="/pruebas" >Pruebas Materiales</a></li>
           </ul>
 </div>
+
           <div class="tab-content " >
             <div class="tab-pane fade in active" id="prueba">
               <div class="container-fluid " id="margenSubmenu">
@@ -72,6 +73,7 @@
 </div>
 
 </div>
+            </div>
             </div>
 
             <div class="container-fluid tabla">
