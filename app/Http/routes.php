@@ -28,9 +28,8 @@ Route::post('buscarProveedores',
   Route::post('buscarBeneficiarios',
                 ['as' => 'buscarBene', 'uses' => 'BeneController@buscarB']);
    Route::post('buscarPrueba',
-                              ['as' => 'buscarPr', 'uses' => 'PersonalController@buscarP']);
-                              Route::post('buscarPrueba',
-                                                         ['as' => 'buscarP', 'uses' => 'PersonalController@buscarP']);
+                              ['as' => 'buscarPr', 'uses' => 'PruebascrudController@buscarP']);
+
 route::resource('clientes','ClienteController');
 route::resource('pruebascrud','PruebascrudController');
 route::resource('pruebamat','PruebasController');
