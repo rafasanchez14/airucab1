@@ -45,8 +45,8 @@ $beneficiarios=DB::select("SELECT beneficiario.id_bene,beneficiario.nombre_bene,
 
     public function pruebascrud()
     {
-        $lugares=DB::select("SELECT nombre_lugar,id_lugar FROM lugar WHERE tipo_lugar='pa' order by nombre_lugar;");
-        return view('portal/airucab-pruebascrud');
+        $pruebas=DB::select("SELECT cod_prueba,nombre_prueb,descrip_prue FROM Prueba order by nombre_prueb");
+        return view('portal/airucab-pruebascrud',compact('pruebas'));
     }
 
     public function proveedores()
