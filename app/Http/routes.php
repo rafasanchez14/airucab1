@@ -16,7 +16,7 @@ route::get('/','VistaController@inicio');
  route::get('proveedores','VistaController@proveedores');
  route::get('sedes','VistaController@sedes');
  route::get('pruebas','VistaController@pruebasmat');
-  route::get('/pruebascrud','VistaController@pruebascrud');
+  route::get('pruebascrud','VistaController@pruebascrud');
  route::get('materiaPrima','VistaController@materiaPrima');
  route::get('diseñoAvion','VistaController@diseñoAvion');
  Route::resource('material', 'materialController');
@@ -27,9 +27,12 @@ Route::post('buscarProveedores',
         ['as' => 'buscarProv', 'uses' => 'ProveedorController@buscarP']);
   Route::post('buscarBeneficiarios',
                 ['as' => 'buscarBene', 'uses' => 'BeneController@buscarB']);
-   Route::post('buscarPersonal',
-                              ['as' => 'buscarPer', 'uses' => 'PersonalController@buscarP']);
+   Route::post('buscarPrueba',
+                              ['as' => 'buscarPr', 'uses' => 'PersonalController@buscarP']);
+                              Route::post('buscarPrueba',
+                                                         ['as' => 'buscarP', 'uses' => 'PersonalController@buscarP']);
 route::resource('clientes','ClienteController');
+route::resource('pruebascrud','PruebascrudController');
 route::resource('pruebamat','PruebasController');
 route::resource('proveedores','ProveedorController');
 route::resource('beneficiarios','BeneController');
@@ -44,6 +47,7 @@ Route::post('/inserta-proveedor','ProveedorController@insertar_proveedor' );
 Route::post('/inserta-cliente','clientController@insertar_cliente' );
 Route::post('/inserta-materialprueba','PruebasController@insertar_matp' );
 Route::post('/inserta-personal','PersonalController@insertar_pers' );
+Route::post('/inserta-prueba','PruebascrudController@insertar_prueba' );
 Route::get('/lista-proveedor','ProveedorController@listar_proveedor' );
 route::get('beneficiarios','VistaController@beneficiarios');
 });
