@@ -156,7 +156,7 @@ from personal,sede,lugar l1,lugar l2,lugar l3,lugar l4 where personal.id_lugar=l
        SET  nombre_personal=?, apellido_personal=?, nombre2_personal=?,
            apellido2_personal=?, titulacion=?, fechainicio=?, fechafin=?,
         id_lugar=?, cod_sede=? WHERE id_personal=? ",array($request->nombre_personal,$request->apellido_personal,$request->nombre2_personal,$request->apellido2_personal,
-         $request->titulacion,$request->fecha_ingr,$request->fecha_final,$request->id_lugar,$request->sede,$id));
+         $request->titulación,$request->fecha_ini,$request->fecha_fin,$request->id_lugar,$request->sede,$id));
          Session::flash('save','Personal modificado correctamente');
          return redirect('/clientes');
   }
