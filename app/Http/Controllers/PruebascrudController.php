@@ -51,12 +51,12 @@ public function insertar_prueba(Request $request)
 
     }
 
-    public function buscarMP(Request $request){
+    public function buscarP(Request $request){
 
        $clavemp = $request->clave;
-       $pruebas=DB::selec("SELECT cod_prueba,nombre_prueb,descrip_prue FROM Prueba where nombre_prueb like'%$clavemp%' order by nombre_prueb");
+       $pruebas=DB::select("SELECT cod_prueba,nombre_prueb,descrip_prue FROM Prueba where nombre_prueb like'$clavemp%' order by nombre_prueb");
        if(count($pruebas) > 0)
-        return view('portal/airucab-clientes',compact('pruebas'));
+        return view('portal/airucab-pruebascrud',compact('pruebas'));
         else{
               Session::flash('delete','No se encontraron resultados');
       return redirect('/pruebascrud');
