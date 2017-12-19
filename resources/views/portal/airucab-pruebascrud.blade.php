@@ -48,14 +48,30 @@
   </div>
 </div>
 </div>
+<div class="container-fluid">
+<div class="row">
+
+              <div class="col-lg-3 col-lg-offset-8">
+                {!!Form::open(['route'=>'buscarPr','method'=>'POST','role' => 'search'])!!}
+               <div class="input-group" >
+                {!!Form::text('nombre',null,['id'=>'nombre', 'class'=>'form-control','placeholder'=>'Buscar cliente por nombre','required'])!!}
+                <div class="input-group-btn">
+                  <button id="buscar" class="btn btn-info" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Buscar</button>
+                </div>
+              </div>
+              {!!Form::close()!!}
+            </div>
+          </div>
+          <br>
+</div>
 <div class="container-fluid tabla">
   <div class="row">
     <div class="col-lg-10 col-lg-offset-1 ">
       <table class="table">
         <thead id="botonAzul">
           <th>Codigo</th>
-          <th>Fecha inicio</th>
-          <th>Fecha fin</th>
+          <th>Nombre</th>
+          <th>Descripcion</th>
           <th></th>
           <th></th>
         </thead>
