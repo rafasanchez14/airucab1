@@ -54,8 +54,8 @@
       <table class="table">
         <thead id="botonAzul">
           <th>Codigo</th>
-          <th>Fecha inicio</th>
-          <th>Fecha fin</th>
+          <th>Nombre</th>
+          <th>Descripcion</th>
           <th></th>
           <th></th>
         </thead>
