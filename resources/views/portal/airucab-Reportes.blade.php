@@ -26,10 +26,10 @@
             <td class="col-xs-3">Lista de proveedores</td>
             <td class="col-xs-2"> <a href ='/prov'> <button type="button" class="btn btn-success" >Generar </button> </a> </td>
            </tr>
-          
+
            <tr>
-            <td class="col-xs-3">prueba</td>
-            <td class="col-xs-2"> <a href = ""> <button type="button" class="btn btn-success" > Generar </button> </a> </td>
+            <td class="col-xs-3">Lista de Modelos</td>
+            <td class="col-xs-2"> <a href = "/modelo"> <button type="button" class="btn btn-success" > Generar </button> </a> </td>
           </tr>
 
           <tr>
@@ -37,7 +37,7 @@
             <td class="col-xs-2"> <a href = ""> <button type="button" class="btn btn-success" > Generar </button> </a> </td>
           </tr>
        </tbody>
-       
+
        </table>
 
     </div>
