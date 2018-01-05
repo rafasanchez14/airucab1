@@ -38,6 +38,7 @@
        <li id="fondobarra"><a href="/diseñoAvion" id="texto">DISEÑO DE AVIÓN</a></li>
          <li id="fondobarra"><a href="" id="texto">PIEZA</a></li>
          <li id="fondobarra"><a href="" id="texto">DISTRIBUCIÓN</a></li>
+         <li id="fondobarra"><a href="/reports" id="texto">REPORTES</a></li>
       </ul>
 
     </div>
