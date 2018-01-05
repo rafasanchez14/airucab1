@@ -37,6 +37,7 @@ route::resource('proveedores','ProveedorController');
 route::resource('beneficiarios','BeneController');
 route::resource('registro','PersonalController');
 route::resource('lugares','LugarController');
+
 Route::post('/inserta-bene','BeneController@insertar_bene' );
 Route::get('/buscarEstado/{id}/pertenece','VistaController@buscarEstados');
 Route::get('/buscarMatpru','PruebasController@buscarMP');
@@ -49,6 +50,16 @@ Route::post('/inserta-personal','PersonalController@insertar_pers' );
 Route::post('/inserta-prueba','PruebascrudController@insertar_prueba' );
 Route::get('/lista-proveedor','ProveedorController@listar_proveedor' );
 route::get('beneficiarios','VistaController@beneficiarios');
+
+// Rutas para los Reportes
+Route::resource('reports','reportController');
+Route::get('/prov','reportController@proveedor');
+
+
+
+
+
+
 });
 Route::auth();
 Route::get('/home', 'HomeController@index');
