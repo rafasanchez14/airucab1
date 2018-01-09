@@ -15,7 +15,7 @@ class reportController extends Controller
 
 
 
-    return view ('portal/airucab-Reportes');
+    return view ('report/airucab-Reportes');
 
 
     }
@@ -29,17 +29,59 @@ class reportController extends Controller
 
 
 
-    return view ('portal/airucab-listaP',compact('proveedores'));
+    return view ('report/airucab-listaP',compact('proveedores'));
 
 
    }
+
+    public function cliente() {
+
+
+
+    $cliente= DB::select(DB::raw(" SELECT c.id_cliente  as id , c.nombre_cliente as cliente,count(a.nro_solicitud)as ordenes
+                                   from Avion a, Cliente c, Solicitud s
+                                   where a.nro_solicitud=s.nro_solicitud AND c.id_cliente=s.id_cliente AND s.fechasol BETWEEN '2017-01-01'AND '2017-12-31'
+                                   group by id
+                                   order by ordenes DESC
+                                   Limit 10;"));
+
+     return view ('report/airucab-compra',compact('cliente'));
+
+    }
+
+    public function inventario() {
+   
+    $inventario=DB::select(DB::raw("SELECT m.cod_material as codigo,i.cant as cantidad,m.nombre as name,s.nombre_sede as sede,i.fechainv as fecha
+                                    from Inventario i,Sede s,Material m
+                                    where i.cod_material=m.cod_material AND i.cod_sede=s.cod_sede AND i.fechainv BETWEEN '2017-11-01' AND '2017-11-30'
+                                    group by codigo,name,cantidad,sede,fecha;"));
+    
+    return view ('report/airucab-inventario',compact('inventario'));
+
+
+   }
+
+    public function producto() {
+
+    $producto=DB::select(DB::raw("SELECT m.cod_material as codigo, m.nombre as name,m.descrip as descri, count(*) cantidad
+                                  from Material m,Orden_compra x
+                                  where m.cod_material=x.cod_material 
+                                  group by codigo,name,descri 
+                                  order by cantidad DESC
+                                  Limit 1;"));
+
+    return view ('report/airucab-producto',compact('producto'));
+
+
+   }
+
 
    public function modelo(){
 
    $modelos=DB::select(DB::raw( "SELECT *
                                      from modelo
                                      order by id_modelo"));
-   return view ('portal/airucab-listaM',compact('modelos'));
+   return view ('report/airucab-listaM',compact('modelos'));
   }
 
 

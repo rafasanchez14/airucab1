@@ -54,6 +54,9 @@ route::get('beneficiarios','VistaController@beneficiarios');
 // Rutas para los Reportes
 Route::resource('reports','reportController');
 Route::get('/prov','reportController@proveedor');
+Route::get('/cliente','reportController@cliente');
+Route::get('/inv','reportController@inventario');
+Route::get('/producto','reportController@producto');
 Route::get('/modelo','reportController@modelo');
 
 

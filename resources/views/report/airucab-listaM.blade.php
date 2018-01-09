@@ -8,7 +8,7 @@
     <div class="container-fluid">
   <div class="row">
      <div class="col-lg-4 col-lg-offset-1 ">
-       <h2 id="margenSubmenu">LISTA DE MODELOS</h2>
+       <h2 class="col-lg-12" id="margenSubmenu">LISTA DE MODELOS</h2>
      </div>
   </div>
 
