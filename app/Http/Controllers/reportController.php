@@ -63,12 +63,12 @@ class reportController extends Controller
 
     public function producto() {
 
-    $producto=DB::select(DB::raw("SELECT m.cod_material as codigo, m.nombre as name,m.descrip as descri, count(*) cantidad
-                                  from Material m,Orden_compra x
+    $producto=DB::select(DB::raw("SELECT m.cod_material as codigo,m.nombre as name ,m.descrip as descri,min(x.cant) as cantidad
+                                  from Material m,Inventario x
                                   where m.cod_material=x.cod_material 
-                                  group by codigo,name,descri 
-                                  order by cantidad DESC
-                                  Limit 1;"));
+                                  group by codigo,name,descri
+                                  order by cantidad ASC
+                                  limit 1;"));
 
     return view ('report/airucab-producto',compact('producto'));
 
@@ -102,7 +102,20 @@ class reportController extends Controller
                                  where mp.cod_material=m.cod_material AND mp.cod_prueba=p.cod_prueba AND mp.cod_status=e.id_status AND e.nombre_status='No satisfactorio';"));
    
 
-   return view ('report/airucab-cantidad',compact('materiales','cantidad'));
+   $piezas=DB::select(DB::raw("SELECT p.nombre_pieza as name,pr.nombre_prueb as prueba,e.nombre_status as estatus
+                               from Pieza_prueba pp,pieza p,Prueba pr,Estatus e
+                               where pp.cod_pieza=p.cod_pieza AND pp.cod_prueba=pr.cod_prueba AND pp.id_estatus=e.id_status AND e.nombre_status='No satisfactorio'
+                               group by name,prueba,estatus;"));
+   
+   
+   $canti=DB::selectone("SELECT count(Distinct pp.cod_pieza) as cant
+                             from Pieza_prueba pp,Pieza p,Prueba pr,Estatus e
+                             where pp.cod_pieza=p.cod_pieza AND pr.cod_prueba=pp.cod_prueba AND pp.id_estatus=e.id_status AND e.nombre_status='No satisfactorio' ;");
+   
+   
+   
+   
+   return view ('report/airucab-cantidad',compact('materiales','cantidad','piezas','canti'));
 
 
    }

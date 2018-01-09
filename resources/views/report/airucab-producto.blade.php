@@ -21,7 +21,7 @@
           <th>Codigo-producto</th>
           <th>Nombre</th>
           <th>Descripción</th>
-          <th>Numero de pedidos</th>
+          <th>Cantidad</th>
           
          
         </thead>
