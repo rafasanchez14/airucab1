@@ -57,6 +57,8 @@ Route::get('/prov','reportController@proveedor');
 Route::get('/cliente','reportController@cliente');
 Route::get('/inv','reportController@inventario');
 Route::get('/producto','reportController@producto');
+Route::get('/ala','reportController@ala');
+Route::get('/prueba','reportController@prueba');
 Route::get('/modelo','reportController@modelo');
 
 

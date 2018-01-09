@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','Producto')
+@section('title','Pruebas')
 @section('content')
 @include('layouts.messages')
 
@@ -8,7 +8,7 @@
     <div class="container-fluid">
   <div class="row">
      <div class="col-lg-4 col-lg-offset-1 ">
-       <h2 class="col-lg-12" id="margenSubmenu">PRODUCTO MAS PEDIDO</h2>
+       <h2 class="col-lg-12" id="margenSubmenu">CANTIDAD MATERIALES</h2>
      </div>
   </div>
 
@@ -18,24 +18,28 @@
     <div class="col-lg-8 col-lg-offset-1 ">
       <table class="table" style="margin-top:3em;">
         <thead id="botonAzul">
-          <th>Codigo-producto</th>
-          <th>Nombre</th>
-          <th>Descripción</th>
-          <th>Numero de pedidos</th>
-          
          
+          <th>Nombre</th>
+          <th>Prueba</th>
+          <th>Estatus</th>
+          
         </thead>
-        @foreach($producto as $product)
+        @foreach($materiales as $mat)
         <tbody class="well">
-          <td>{{$product->codigo}}</td>
-          <td>{{$product->name}}</td>
-          <td>{{$product->descri}}</td>
-          <td>{{$product->cantidad}}</td>
-          
-          
-       </tbody>
+          <td>{{$mat->name}}</td>
+          <td>{{$mat->prueba}}</td>
+          <td>{{$mat->estatus}}</td>
+        </tbody>
        @endforeach
       </table>
+      
+      @foreach($cantidad as $cant)
+      
+      <p>cantidad de productos que no cumplieron con la prueba de calidad:{{$cant->cantidad}} materiales</p>
+    
+      @endforeach
+
+
     </div>
   </div>
 </div>
