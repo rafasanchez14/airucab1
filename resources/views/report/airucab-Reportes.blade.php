@@ -51,7 +51,7 @@
 
           <tr>
             <td class="col-xs-3">El modelo mas vendido</td>
-            <td class="col-xs-2"> <a href = ""> <button type="button" class="btn btn-success" > Generar Reporte </button> </a> </td>
+            <td class="col-xs-2"> <a href = 'model'> <button type="button" class="btn btn-success" > Generar Reporte </button> </a> </td>
           </tr>
 
 

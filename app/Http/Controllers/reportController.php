@@ -147,7 +147,21 @@ class reportController extends Controller
   
   }
 
+  public function model(){
 
+    $model=DB::select(DB::raw("SELECT m.id_modelo as codigo ,m.nombre_modelo as nombre,count(*) as avion
+                               from Orden_compra_cliente o, Modelo m, avion a
+                               where o.cod_avion=a.cod_avion AND a.id_modelo=m.id_modelo
+                               group by codigo,nombre
+                               order by avion DESC
+                               Limit 1;"));
+    
+     return view ('report/airucab-model',compact('model'));
+    
+    
+    }
+
+    
 
 
 
@@ -188,7 +202,7 @@ where m.id_modelo=a.id_modelo and a.cod_avion=b.cod_avion  "));
   public function equipoef()
 
   {
-    $equi=DB::select(DB::raw( "SELECT p.nombre_personal as nombre ,p.apellido_personal as apellido,e.cod_equipo from personal p, equipo e where p.id_personal=e.cod_personal and cod_equipo=(
+    $equi=DB::select(DB::raw( "SELECT p.nombre_personal as nombre ,p.apellido_personal as apellido,e.cod_equipo from personal p, equipo e where p.id_personal=e.cod_personal and cod_equipo in(
 
 select cod_equipo from ensam_pieza where (fechafin-fechainic)= (select min(fechafin-fechainic) as diferencia from ensam_pieza) )"));
     return view ('report/airucab-Equipof',compact('equi'));
@@ -197,7 +211,7 @@ select cod_equipo from ensam_pieza where (fechafin-fechainic)= (select min(fecha
   public function sedef()
 
   {
-    $sedef=DB::select(DB::raw( "SELECT p.cod_sede as cod, a.nombre_sede as nombre from personal p, equipo e, sede a where p.cod_sede=a.cod_sede and p.id_personal=e.cod_personal and cod_equipo=(
+    $sedef=DB::select(DB::raw( "SELECT p.cod_sede as cod, a.nombre_sede as nombre from personal p, equipo e, sede a where p.cod_sede=a.cod_sede and p.id_personal=e.cod_personal and cod_equipo in(
 
 select cod_equipo from ensam_pieza where (fechafin-fechainic)= (select min(fechafin-fechainic) as diferencia from ensam_pieza) )"));
     return view ('report/airucab-Sedef',compact('sedef'));
