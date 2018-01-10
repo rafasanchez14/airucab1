@@ -20,6 +20,16 @@ class reportController extends Controller
 
     }
 
+
+    public function evo() {
+
+
+
+    return view ('report/airucab-Aeronautica');
+
+
+    }
+
     public function proveedor(){
 
     $proveedores=DB::select(DB::raw( "SELECT p.id_proveedor as id,p.nombre,p.fechainic as fecha,p.montoac as monto,l.nombre_lugar as lugar
@@ -131,7 +141,8 @@ class reportController extends Controller
    return view ('report/airucab-listaM',compact('modelos'));
   }
 
-  public function mejorPlazo(){
+  public function mejorPlazo()
+  {
 
   $mejorp=DB::select(DB::raw( "SELECT  b.cod_avion as cod_av, b.proav as prom , m.nombre_modelo as modelo from
 (SELECT avg(fechafin-fechaini)as proav, cod_avion from ensamb_avion
