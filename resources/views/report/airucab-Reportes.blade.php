@@ -74,7 +74,7 @@
 
           <tr>
             <td class="col-xs-3">El tipo de alas mas utilizado en los aviones</td>
-            <td class="col-xs-2"> <a href = ""> <button type="button" class="btn btn-success" > Generar Reporte  </button> </a> </td>
+            <td class="col-xs-2"> <a href ='/ala'> <button type="button" class="btn btn-success" > Generar Reporte  </button> </a> </td>
           </tr>
           <tr>
             <td class="col-xs-3">Cuales fueron los aviones mas rentables en base al cumplimiento de las fechas durante su producción</td>
@@ -87,7 +87,7 @@
           </tr>
           <tr>
             <td class="col-xs-3">Cantidad de productos que no cumplieron con las pruebas de calidad</td>
-            <td class="col-xs-2"> <a href = ""> <button type="button" class="btn btn-success" > Generar Reporte </button> </a> </td>
+            <td class="col-xs-2"> <a href = 'prueba'> <button type="button" class="btn btn-success" > Generar Reporte </button> </a> </td>
           </tr>
           <tr>
             <td class="col-xs-3">Promedio de traslados entre las sedes</td>

@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title','Producto')
+@section('title','Alas')
 @section('content')
 @include('layouts.messages')
 
@@ -8,7 +8,7 @@
     <div class="container-fluid">
   <div class="row">
      <div class="col-lg-4 col-lg-offset-1 ">
-       <h2 class="col-lg-12" id="margenSubmenu">PRODUCTO MAS PEDIDO</h2>
+       <h2 class="col-lg-12" id="margenSubmenu">TIPO DE ALA</h2>
      </div>
   </div>
 
@@ -18,20 +18,19 @@
     <div class="col-lg-8 col-lg-offset-1 ">
       <table class="table" style="margin-top:3em;">
         <thead id="botonAzul">
-          <th>Codigo-producto</th>
+          <th>Codigo-pieza</th>
           <th>Nombre</th>
           <th>Descripción</th>
-          <th>Cantidad</th>
+          <th>Modelos-involucrados</th>
           
-         
         </thead>
-        @foreach($producto as $product)
+        @foreach($alas as $ala)
         <tbody class="well">
-          <td>{{$product->codigo}}</td>
-          <td>{{$product->name}}</td>
-          <td>{{$product->descri}}</td>
-          <td>{{$product->cantidad}}</td>
-          
+          <td>{{$ala->codigo}}</td>
+          <td>{{$ala->pieza}}</td>
+          <td>{{$ala->descr}}</td>
+          <td>{{$ala->cantidad}}</td>
+         
           
        </tbody>
        @endforeach
