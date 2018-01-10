@@ -58,6 +58,7 @@ Route::get('/cliente','reportController@cliente');
 Route::get('/inv','reportController@inventario');
 Route::get('/producto','reportController@producto');
 Route::get('/modelo','reportController@modelo');
+Route::get('/mejorp','reportController@mejorPlazo');
 
 
 

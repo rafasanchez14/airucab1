@@ -50,12 +50,12 @@ class reportController extends Controller
     }
 
     public function inventario() {
-   
+
     $inventario=DB::select(DB::raw("SELECT m.cod_material as codigo,i.cant as cantidad,m.nombre as name,s.nombre_sede as sede,i.fechainv as fecha
                                     from Inventario i,Sede s,Material m
                                     where i.cod_material=m.cod_material AND i.cod_sede=s.cod_sede AND i.fechainv BETWEEN '2017-11-01' AND '2017-11-30'
                                     group by codigo,name,cantidad,sede,fecha;"));
-    
+
     return view ('report/airucab-inventario',compact('inventario'));
 
 
@@ -65,8 +65,8 @@ class reportController extends Controller
 
     $producto=DB::select(DB::raw("SELECT m.cod_material as codigo, m.nombre as name,m.descrip as descri, count(*) cantidad
                                   from Material m,Orden_compra x
-                                  where m.cod_material=x.cod_material 
-                                  group by codigo,name,descri 
+                                  where m.cod_material=x.cod_material
+                                  group by codigo,name,descri
                                   order by cantidad DESC
                                   Limit 1;"));
 
@@ -83,6 +83,17 @@ class reportController extends Controller
                                      order by id_modelo"));
    return view ('report/airucab-listaM',compact('modelos'));
   }
+
+  public function mejorPlazo(){
+
+  $mejorp=DB::select(DB::raw( "SELECT  b.cod_avion as cod_av, b.proav as prom , m.nombre_modelo as modelo from
+(SELECT avg(fechafin-fechaini)as proav, cod_avion from ensamb_avion
+group by cod_avion order by proav) as b, modelo as m, avion as a
+where m.id_modelo=a.id_modelo and a.cod_avion=b.cod_avion  "));
+  return view ('report/airucab-listaMejorP',compact('mejorp'));
+ }
+
+
 
 
 
