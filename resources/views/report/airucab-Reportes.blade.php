@@ -57,7 +57,7 @@
 
           <tr>
             <td class="col-xs-3">El equipo mas eficiente (en base al menor retraso en sus asignaciones)</td>
-            <td class="col-xs-2"> <a href = ""> <button type="button" class="btn btn-success" > Generar Reporte </button> </a> </td>
+            <td class="col-xs-2"> <a href = "/equipoef"> <button type="button" class="btn btn-success" > Generar Reporte </button> </a> </td>
           </tr>
 
 
@@ -101,7 +101,7 @@
 
            <tr>
             <td class="col-xs-3">Planta mas eficiente en base al cumplimiento de las fechas</td>
-            <td class="col-xs-2"> <a href = ""> <button type="button" class="btn btn-success" > Generar Reporte </button> </a> </td>
+            <td class="col-xs-2"> <a href = "/sedef"> <button type="button" class="btn btn-success" > Generar Reporte </button> </a> </td>
           </tr>
 
           <tr>

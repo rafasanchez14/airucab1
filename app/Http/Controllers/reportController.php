@@ -167,6 +167,25 @@ where m.id_modelo=a.id_modelo and a.cod_avion=b.cod_avion  "));
 
   }
 
+  public function equipoef()
+
+  {
+    $equi=DB::select(DB::raw( "SELECT p.nombre_personal as nombre ,p.apellido_personal as apellido,e.cod_equipo from personal p, equipo e where p.id_personal=e.cod_personal and cod_equipo=(
+
+select cod_equipo from ensam_pieza where (fechafin-fechainic)= (select min(fechafin-fechainic) as diferencia from ensam_pieza) )"));
+    return view ('report/airucab-Equipof',compact('equi'));
+
+  }
+  public function sedef()
+
+  {
+    $sedef=DB::select(DB::raw( "SELECT p.cod_sede as cod, a.nombre_sede as nombre from personal p, equipo e, sede a where p.cod_sede=a.cod_sede and p.id_personal=e.cod_personal and cod_equipo=(
+
+select cod_equipo from ensam_pieza where (fechafin-fechainic)= (select min(fechafin-fechainic) as diferencia from ensam_pieza) )"));
+    return view ('report/airucab-Sedef',compact('sedef'));
+
+  }
+
 
 
 

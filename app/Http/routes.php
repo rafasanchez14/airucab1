@@ -64,6 +64,8 @@ Route::get('/mejorp','reportController@mejorPlazo');
 Route::get('/evolucion-aeronautica','reportController@evo');
 Route::get('/piezaform','reportController@piezaform');
 Route::get('/promen','reportController@promen');
+Route::get('/equipoef','reportController@equipoef');
+Route::get('/sedef','reportController@sedef');
 
 
 
