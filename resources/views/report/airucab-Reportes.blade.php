@@ -24,7 +24,7 @@
         <tbody class="well">
            <tr>
             <td class="col-xs-3">Producción anual</td>
-            <td class="col-xs-1"> <a href => <button type="button" class="btn btn-success" >Generar Reporte </button> </a> </td>
+            <td class="col-xs-1"> <a href ='/produccion'> <button type="button" class="btn btn-success" >Generar Reporte </button> </a> </td>
            </tr>
 
            <tr>
