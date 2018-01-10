@@ -38,10 +38,10 @@ class reportController extends Controller
 
 
 
-    $cliente= DB::select(DB::raw(" SELECT c.id_cliente  as id , c.nombre_cliente as cliente,count(a.nro_solicitud)as ordenes
-                                   from Avion a, Cliente c, Solicitud s
-                                   where a.nro_solicitud=s.nro_solicitud AND c.id_cliente=s.id_cliente AND s.fechasol BETWEEN '2017-01-01'AND '2017-12-31'
-                                   group by id
+    $cliente= DB::select(DB::raw(" SELECT c.id_cliente  as id , c.nombre_cliente as cliente,count(*)as ordenes
+                                   from Pago_Avion a, Cliente c, Orden_compra_cliente o
+                                   where a.id_orden_cliente=o.id_orden_cliente AND c.id_cliente=o.id_cliente AND o.fecha BETWEEN '2017-01-01'AND '2017-12-31'
+                                   group by id,cliente
                                    order by ordenes DESC
                                    Limit 10;"));
 
