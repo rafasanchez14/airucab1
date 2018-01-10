@@ -68,6 +68,7 @@ Route::get('/piezaform','reportController@piezaform');
 
 
 
+
 });
 Route::auth();
 Route::get('/home', 'HomeController@index');

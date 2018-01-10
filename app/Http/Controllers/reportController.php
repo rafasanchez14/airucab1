@@ -150,6 +150,11 @@ group by cod_avion order by proav) as b, modelo as m, avion as a
 where m.id_modelo=a.id_modelo and a.cod_avion=b.cod_avion  "));
   return view ('report/airucab-listaMejorP',compact('mejorp'));
  }
+ public function piezaform()
+ {
+ $piezasf=DB::select(DB::raw( "SELECT * From Pieza"));
+ return view ('report/airucab-piezaF',compact('piezasf'));
+}
 
 
 
