@@ -156,6 +156,17 @@ where m.id_modelo=a.id_modelo and a.cod_avion=b.cod_avion  "));
  return view ('report/airucab-piezaF',compact('piezasf'));
 }
 
+  public function promen()
+
+  {
+    $promensual=DB::select(DB::raw( "SELECT avg(x.num) as promedio,mes from
+    (select count(p.mes) as num, mes from (select (extract(month from m.fec)) as mes
+    from (select fechafin as fec, cod_avion from ensamb_avion where id_status=16) as m) as p
+    group by mes)x group by mes"));
+    return view ('report/airucab-Promensual',compact('promensual'));
+
+  }
+
 
 
 
