@@ -20,7 +20,7 @@
         <thead id="botonAzul">
           <th>Codigo Avion</th>
           <th>Modelo</th>
-          <th>Promedio Duracion</th>
+          <th>Promedio Duracion (Dias)</th>
         </thead>
         @foreach($mejorp as $mp)
         <tbody class="well">

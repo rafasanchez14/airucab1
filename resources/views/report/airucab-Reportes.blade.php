@@ -38,7 +38,7 @@
            </tr>
            <tr>
             <td class="col-xs-3">Evolución de la aeronáutica</td>
-            <td class="col-xs-1"> <a href => <button type="button" class="btn btn-success" >Generar Reporte </button> </a> </td>
+            <td class="col-xs-1"> <a href ='/evolucion-aeronautica'> <button type="button" class="btn btn-success" >Generar Reporte </button> </a> </td>
            </tr>
            <tr>
             <td class="col-xs-3"> Modelos de aviones</td>
@@ -53,7 +53,7 @@
             <td class="col-xs-3">El modelo mas vendido</td>
             <td class="col-xs-2"> <a href = ""> <button type="button" class="btn btn-success" > Generar Reporte </button> </a> </td>
           </tr>
-           
+
 
           <tr>
             <td class="col-xs-3">El equipo mas eficiente (en base al menor retraso en sus asignaciones)</td>
@@ -65,7 +65,7 @@
             <td class="col-xs-3">Inventario Mensual</td>
             <td class="col-xs-2"> <a href ='/inv'> <button type="button" class="btn btn-success" > Generar Reporte  </button> </a> </td>
           </tr>
-           
+
 
           <tr>
             <td class="col-xs-3">Producto mas pedido al inventario</td>
@@ -78,7 +78,6 @@
           </tr>
           <tr>
             <td class="col-xs-3">Cuales fueron los aviones mas rentables en base al cumplimiento de las fechas durante su producción</td>
-            <td class="col-xs-2"> <a href = ""> <button type="button" class="btn btn-success" > Generar Reporte </button> </a> </td>
             <td class="col-xs-2"> <a href = "/mejorp"> <button type="button" class="btn btn-success" > Generar Reporte </button> </a> </td>
           </tr>
           <tr>
@@ -107,7 +106,7 @@
 
           <tr>
             <td class="col-xs-3">Descripción de piezas(formato del enunciado)</td>
-            <td class="col-xs-2"> <a href = ""> <button type="button" class="btn btn-success" > Generar Reporte  </button> </a> </td>
+            <td class="col-xs-2"> <a href = "/piezaform"> <button type="button" class="btn btn-success" > Generar Reporte  </button> </a> </td>
           </tr>
 
 
