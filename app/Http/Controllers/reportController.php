@@ -129,6 +129,24 @@ class reportController extends Controller
 
 
    }
+    
+    public function produccion(){
+
+   $produccion=DB::select(DB::raw("SELECT e.cod_ensamav as codigo,e.fechafin as fecha,x.nombre_status as estatus,a.cod_avion as avion
+                                   from Ensamb_Avion e,Estatus x, Avion a
+                                   where  e.cod_avion=a.cod_avion AND e.id_status=x.id_status AND e.fechafin BETWEEN '2017-01-01' AND '2017-12-31' and x.nombre_status='Finalizado'
+                                   group by codigo,fecha,estatus,avion;"));
+   
+   $cant=DB::select(DB::raw("SELECT count(*) as produccion
+                        from Ensamb_Avion e, Estatus x
+                        where e.fechafin BETWEEN '2017-01-01' AND '2017-12-31' AND e.id_status=x.id_status AND x.nombre_status='Finalizado';"));
+  
+  
+   return view ('report/airucab-produccion',compact('produccion','cant'));
+  
+  
+  }
+
 
 
 
