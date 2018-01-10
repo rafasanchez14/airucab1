@@ -29,7 +29,7 @@
 
            <tr>
             <td class="col-xs-3">Promedio de Producción mensual</td>
-            <td class="col-xs-1"> <a href => <button type="button" class="btn btn-success" >Generar Reporte </button> </a> </td>
+            <td class="col-xs-1"> <a href ='/promen'> <button type="button" class="btn btn-success" >Generar Reporte </button> </a> </td>
            </tr>
 
            <tr>
